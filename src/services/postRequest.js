@@ -59,7 +59,7 @@ export const getJD = async(companyName,role,batch)=>{
         batch : batch
     }
 
-    return await axios.post(process.env.REACT_APP_BACKEND_API+"/sece/user/jdfiledownload",data,{withCredentials:true});
+    return await axios.post(process.env.REACT_APP_BACKEND_API+"/sece/user/jdfiledownload",data,{withCredentials:true,responseType:ArrayBuffer});
 }
 
 //request for updating user details
