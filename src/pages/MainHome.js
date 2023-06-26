@@ -101,7 +101,7 @@ const MainHome = () => {
                <Button className="bottom-right" variant="outline-primary" onClick={()=>navigate("/login")}>
                  <strong>ADMIN LOGIN</strong>
                </Button>
-               <img src="/GraduateCard.jpg" alt="GraduateCard"></img>
+               <img src="/GraduateCard.jpg" alt="GraduateCard" className="graduateCard"></img>
              </div>
            </Col>
         ):(

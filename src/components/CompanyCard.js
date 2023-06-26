@@ -12,7 +12,7 @@ import ProgressBar from "./progressBar";
 
 
 const CompanyCard = (props) => {
-  const { _id,CompanyName, Role, Package, Batch,Category, LastDateOfRegistration,DateOfDrive,RegistrationCount} = props.company;
+  const { _id,companyName, role, Package, batch,category, lastDateOfReg,dateOfDrive,RegistrationCount} = props.company;
 
   const barValue = props.barVal;
 
@@ -24,7 +24,7 @@ const CompanyCard = (props) => {
       return (
         <>
           <Col xs={6}>
-          <Link to='/singleCompanyresult' state={{companyName:CompanyName,batch:Batch}}>
+          <Link to='/singleCompanyresult' state={{companyName:companyName,batch:batch}}>
             <Button variant="outline-success" size="sm">Results</Button>
             </Link>
           </Col>
@@ -40,7 +40,7 @@ const CompanyCard = (props) => {
         <>
           <Col xs={6}></Col>
           <Col xs={6} style={{ textAlign: "right" }}>
-            <Link to='/singleCompanyresult' state={{companyName:CompanyName,batch:Batch}}>
+            <Link to='/singleCompanyresult' state={{companyName:companyName,batch:batch}}>
             <Button variant="outline-success" size="sm">Results</Button>
             </Link>
             
@@ -59,12 +59,12 @@ const CompanyCard = (props) => {
             <img src="/loginLogo.jpg" alt='image not loading' className="iconimg"></img>{" "}
           </div>
           <div className="ms-2 c-details">
-            <h4 className="mb-0" style={{textTransform:"uppercase",fontFamily:"fantasy"}}>{CompanyName}</h4> <span>{dayjs(DateOfDrive).format("DD/MM/YYYY")}</span>
+            <h4 className="mb-0" style={{textTransform:"uppercase",fontFamily:"fantasy"}}>{companyName}</h4> <span>{dayjs(dateOfDrive).format("DD/MM/YYYY")}</span>
           </div>
         </div>
         <div className="badge">
           {" "}
-          <span>{Category}</span>{" "}
+          <span>{category}</span>{" "}
         </div>
       </div>
       <div className="mt-3">
@@ -74,9 +74,9 @@ const CompanyCard = (props) => {
           </h5>
           <h4 style={{textAlign:"center",fontSize:"20",textTransform:"uppercase",fontFamily:"fantasy",color:"red"}}> {companyName}</h4>
         </div> */}
-        <h7 style={{textTransform:"uppercase"}} className="text2"><strong>Role : {Role}</strong></h7><br></br>
+        <h7 style={{textTransform:"uppercase"}} className="text2"><strong>Role : {role}</strong></h7><br></br>
         <h7 style={{textTransform:"uppercase"}} className="text2"><strong>Package : {Package}</strong></h7>
-        <h7 style={{textTransform:"uppercase"}} className="text2"><strong>Batch : {Batch}</strong></h7>
+        <h7 style={{textTransform:"uppercase"}} className="text2"><strong>Batch : {batch}</strong></h7>
       </div>
       <div className="mt-2">
           <ProgressBar barValue={barValue} />

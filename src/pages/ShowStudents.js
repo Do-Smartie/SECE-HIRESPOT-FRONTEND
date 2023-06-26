@@ -152,11 +152,11 @@ const ShowStudents = () => {
     getStudents(neededBatch).then((res)=>{
       console.log(res);
       if(res.Success){
-         setStudents(res.data);
+         setStudents(res.data.Data);
          setBoolConfirm(false);
       }
     }).catch((err)=>{
-       window.alert("An Error Occurred in Filtering - Try Again");
+       window.alert(err.response.data.Message);
     }).finally(()=>{
       setBoolConfirm(false);
     })
@@ -209,7 +209,7 @@ const ShowStudents = () => {
                  <span className="visually-hidden">Loading...</span>
                </Spinner>
               ):(
-                  <StudentsTable TableData = {dummyUsers}  />
+                  <StudentsTable TableData = {students}  />
               )}
             </Card>
                

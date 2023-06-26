@@ -9,17 +9,23 @@ export const isAuthenticated =()=>{
     // return true;
 }
 
+export async function getCookie(){
+
+    if(sessionStorage.getItem("userType")==undefined){
+            console.log("bla");
+            let resp = await getUserTypeOnLogin();
+            sessionStorage.setItem("userType",resp.data);
+        
+     }
+
+}
 
 //confirming user
-export const isAdmin = async()=>{
+export const isAdmin = ()=>{
     
-    // if(sessionStorage.getItem("userType")==undefined){
-    //     console.log("bla");
-    //     let resp = await getUserTypeOnLogin();
-    //     sessionStorage.setItem("userType",resp.data);
-    // }
-
-    // return sessionStorage.getItem('userType')=="Admin";
-    return true;
+    // 
+    console.log('isAdmin',sessionStorage.getItem("userType")=="Admin");
+    return sessionStorage.getItem('userType')=="Admin";
+    // return true;
 }
 

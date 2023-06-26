@@ -2,9 +2,9 @@ import { Link, Navigate,useNavigate } from "react-router-dom";
 import "../App.css";
 import { useState } from "react";
 import { register } from "../services/postRequest";
-import { isAuthenticated } from "../services/Auth";
+import { getCookie, isAuthenticated } from "../services/Auth";
 import MainNavbar from "../components/MainNavbar";
-import { storeUserType } from "../services/storage";
+
 
 
 
@@ -33,16 +33,17 @@ const Register = () => {
     setLoading(true);
     console.log(registerData);
     register(registerData)
-      .then((res) => {
+      .then(async(res) => {
         console.log(res);
         if(res.status == 200){
             window.alert("Registration Succesfully Completed");
             sessionStorage.setItem("isAuth",true);
+            await getCookie();
         }
       })
       .catch((err) => {
         console.log(err);
-        window.alert("Error Occurred in Registeration - Try Again");
+        window.alert(err.response.data.Message);
       })
       .finally(() => {
         setLoading(false);
@@ -54,7 +55,7 @@ const Register = () => {
       password: "",
       regNo: "",
       rollNo :"",
-      userType : null,
+      userType : "",
       batch: "",
       department: "",
     });

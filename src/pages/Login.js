@@ -2,8 +2,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import "../App.css";
 import { useState } from "react";
 import { login } from "../services/postRequest";
-import {  storeUserType } from "../services/storage";
-import {   isAuthenticated } from "../services/Auth";
+import {   getCookie, isAuthenticated } from "../services/Auth";
 import MainNavbar from "../components/MainNavbar";
 
 const Login = () => {
@@ -23,15 +22,21 @@ const Login = () => {
     event.preventDefault();
     console.log(userData);
 	setLoading(true);
-	login(userData).then((res)=>{
+	login(userData).then(async (res)=>{
   
-    if(res.status==200){
+    if(res.status===200){
       sessionStorage.setItem("isAuth",true);
+      await getCookie();
+
     }
 	}).catch((err)=>{
 		console.log(err.response.data.Message);
     window.alert(err.response.data.Message);
-    setValid(true);
+    let mess = err.response.data.Message;
+    if(mess==="Hello User! Username Provided is Invalid..." || mess==="Hello User! User Password Provided is Invalid..."){
+            setValid(true);
+    }
+    
 	}).finally(()=>{
 		setLoading(false);
 	})
@@ -89,7 +94,7 @@ const Login = () => {
                 </div>
 				<div className="row">
 					<div className="col" style={{textAlign:"center"}}>
-            {valid && (<strong style={{color:"red"}}>Invalid credentials</strong>)}
+            {valid && (<strong style={{color:"red",fontSize:'12px'}}>Invalid credentials</strong>)}
 					</div>
 					<div className="col"></div>
 					

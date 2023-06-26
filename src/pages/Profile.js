@@ -15,12 +15,12 @@ const Profile = () => {
 
   
  const[user,setUser] = useState({
-    username:'GURUPRASATH M',
-    email: 'guruprasath.m2020it@sece.ac.in',
-    password: "gusa",
-    regNo: "722820205014",
-    batch : '2023-2024',
-    department : 'Information Technology'
+    username:'',
+    email: '',
+    password: "",
+    regNo: "",
+    batch : '',
+    department : ''
   });
 
   const[edit,setEdit] = useState(false);
@@ -31,7 +31,7 @@ const Profile = () => {
   useEffect(()=>{
       getUser().then((res)=>{
         console.log(res);
-        if(res.Success){
+        if(res.data.Success){
 
             var data = res.data;
             setUser({data});
@@ -59,8 +59,8 @@ const Profile = () => {
     setSpinner(true);
     updateUser(user).then((res)=>{
         console.log(res);
-        if(res.Success){
-            window.alert(res.Message);
+        if(res.data.Success){
+            window.alert(res.data.Message);
             setEdit(false);
             setSpinner(false);
         }
@@ -83,7 +83,7 @@ const Profile = () => {
                 <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
                   <div class="row align-items-center">
                     <div class="col-lg-6 mb-4 mb-lg-0">
-                      <img src="user.png" alt="..."  style={{height:"340px",width:"340px"}}/>
+                      <img src="user.png" alt="..." className="userProfileImg" />
                       <h3 style={{ marginLeft: "9%", marginTop: "4%" }}>
                         {user.username}
                       </h3>

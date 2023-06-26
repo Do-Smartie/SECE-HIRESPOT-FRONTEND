@@ -28,10 +28,10 @@ const EditCompany = (props)=>{
     //state for company deatails
   const [companyDetails, setCompanyDetails] = useState(
     { 
-      id : currCompany.id,
+      id : currCompany._id,
       companyName: currCompany.companyName,
       role: currCompany.role,
-      package: currCompany.Package,
+      Package: currCompany.Package,
       category: currCompany.category,
       batch : currCompany.batch,
       dateOfDrive: currCompany.dateOfDrive,
@@ -82,7 +82,7 @@ const EditCompany = (props)=>{
     setCompanyDetails({
       companyName: currCompany.companyName,
       role: currCompany.role,
-      package: currCompany.Package,
+      Package: currCompany.Package,
       category: currCompany.category,
       batch : currCompany.batch,
       dateOfDrive: currCompany.dateOfDrive,
@@ -137,7 +137,7 @@ const EditCompany = (props)=>{
                 <Form.Control
                   type="text"
                   value={companyDetails.package}
-                  name="package"
+                  name="Package"
                   onChange={OnHandleChange}
                   placeholder="Enter The Package-(eg : 12LPA (or) 12L-CTC)"
                   required

@@ -11,13 +11,13 @@ import { getJD } from "../services/postRequest.js";
 const UpComingCompany = (props) => {
   
   
-  const { _id,CompanyName, Role, Package, Category, LastDateOfRegistration,DateOfDrive,Batch } = props.company;
+  const { _id,companyName, role, Package, category, lastDateOfReg,dateOfDrive,batch } = props.company;
   
  //downloading jobDescription from DB
 
  const downloadJobDescription = ()=>{
      
-      getJD(CompanyName,Role,Batch).then((res)=>{
+      getJD(companyName,role,batch).then((res)=>{
         console.log(res);
       }).catch((err)=>{
           console.log(err);
@@ -46,7 +46,7 @@ const UpComingCompany = (props) => {
               <Link variant="outline-info" onClick={downloadJobDescription}>Job Description</Link>
             </Col>
             <Col xs={6} style={{ textAlign: "right" }}>
-              <Link to={"/companyRegister"} state={{_id:_id,companyName:CompanyName,role:Role,Package:Package}}><Button className="buttonBlink" size="sm" >Apply Now</Button></Link>
+              <Link to={"/companyRegister"} state={{_id:_id,companyName:companyName,role:role,Package:Package}}><Button className="buttonBlink" size="sm" >Apply Now</Button></Link>
             </Col>
           </>
       );
@@ -62,19 +62,19 @@ const UpComingCompany = (props) => {
             <img src="/loginLogo.jpg" alt="logo" className="iconimg"></img>{" "}
           </div>
           <div className="ms-2 c-details">
-          <h4 className="mb-0" style={{textTransform:"uppercase",fontFamily:"fantasy"}}>{CompanyName}</h4> <span>{dayjs(DateOfDrive).format("DD/MM/YYYY")}</span>
+          <h4 className="mb-0" style={{textTransform:"uppercase",fontFamily:"fantasy"}}>{companyName}</h4> <span>{dayjs(dateOfDrive).format("DD/MM/YYYY")}</span>
           </div>
         </div>
         <div className="badge">
           {" "}
-          <span>{Category}</span>{" "}
+          <span>{category}</span>{" "}
         </div>
       </div>
       <div className="mt-3">
-        <h7 style={{textTransform:"uppercase"}} className="text2"><strong>Role : {Role}</strong></h7><br></br>
+        <h7 style={{textTransform:"uppercase"}} className="text2"><strong>Role : {role}</strong></h7><br></br>
         <h7 style={{textTransform:"uppercase"}} className="text2"><strong>Package : {Package}</strong></h7><br></br>
-        <h7 style={{textTransform:"uppercase"}} className="text2"><strong>Batch : {Batch}</strong></h7><br></br>
-        <h7 style={{textTransform:"uppercase",color:"rgba(255, 49, 49, 0.5)"}} className="text2"><strong>Deadline : {dayjs(LastDateOfRegistration).format('DD/MM/YYYY')}</strong></h7>
+        <h7 style={{textTransform:"uppercase"}} className="text2"><strong>Batch : {batch}</strong></h7><br></br>
+        <h7 style={{textTransform:"uppercase",color:"rgba(255, 49, 49, 0.5)"}} className="text2"><strong>Deadline : {dayjs(lastDateOfReg).format('DD/MM/YYYY')}</strong></h7>
         <div className="mt-4">
           <Row>
             {buttonRender()}

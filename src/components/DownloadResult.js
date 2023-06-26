@@ -17,7 +17,7 @@ const DownloadResult = (props) => {
     const[resultDetail,setResultDetail] = useState({
         companyName : !props ? '' : props.companyName,
         batch : !props ? '' : props.batch,
-        round : ''
+        roundNumber : ''
     });
     
     const[spinner,setSpinner] = useState(false);
@@ -47,7 +47,7 @@ const DownloadResult = (props) => {
         setResultDetail({
             companyName : !props ? '' : props.companyName,
             batch : !props ? '' : props.batch,
-            round : ''
+            roundNumber : ''
         })
     }
   return (
@@ -92,7 +92,7 @@ const DownloadResult = (props) => {
             <Col sm={5}>
               <Form.Control
                 type="number"
-                value={resultDetail.round}
+                value={resultDetail.roundNumber}
                 name="round"
                 onChange={OnHandleChange}
                 placeholder="Enter The Round No-(eg : 1 (or) 2)"

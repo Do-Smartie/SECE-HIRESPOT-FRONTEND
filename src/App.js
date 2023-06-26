@@ -7,7 +7,6 @@ import Login from "./pages/Login";
 import AddCompanies from "./pages/AddCompanies";
 import Home from "./pages/Home";
 import EditCompany from "./pages/EditCompany";
-import { useState } from "react";
 import CompanyRegister from "./pages/CompanyRegister";
 import ProtectedAdminRoutes from "./services/protectedRoutes/protectedAdminRoute";
 import ProtectedUserRoutes from "./services/protectedRoutes/protecteduserRoute";

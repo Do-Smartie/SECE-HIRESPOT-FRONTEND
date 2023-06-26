@@ -109,6 +109,10 @@ const Home = (props) => {
   //registration count
 
   const[registrationCount,setRegistrationCount] = useState([]);
+
+  //navigation to another apge
+  const navigate = useNavigate();
+
   useEffect(() => {
 
     setSpinner(true);
@@ -138,7 +142,9 @@ const Home = (props) => {
       })
       .catch((err) => {
         console.log(err);
-        window.alert(err.response.data.Message);
+        navigate('/404pageNotFound');
+        window.alert(err.response.data.Message,'Reload Page');
+
       }).finally(()=>{
         console.log("process over");
         setSpinner(false);
@@ -160,7 +166,7 @@ const Home = (props) => {
 
   },[]);
 
-const navigate = useNavigate();
+
 
 
   return (

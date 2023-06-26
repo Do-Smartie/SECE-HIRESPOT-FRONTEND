@@ -97,13 +97,13 @@ const RegisteredStudents = () => {
        }
        setSpinner(true);
        getRegisteredStudents(data).then((res)=>{
-           if(res.Success){
+           if(res.data.Success){
              setRegisteredStudents(res.data);  
              setSpinner(false);
            }
        }).catch((err)=>{
         console.log(err);
-        window.alert("Error Occurred in Getting Registered Students - Try Again");
+        window.alert(err.response.data.Message);
        }).finally(()=>{
         console.log("process Over");
         setSpinner(false);
@@ -178,7 +178,7 @@ const RegisteredStudents = () => {
                 <span className="visually-hidden">Loading...</span>
               </Spinner>
             ):(
-               <RegisteredStudentsTable TableData={dummyStudents} comapnyName = {company.comapnyName}/>
+               <RegisteredStudentsTable TableData={registerdStudents} comapnyName = {company.comapnyName}/>
             )}
             </Card> 
         </Row>

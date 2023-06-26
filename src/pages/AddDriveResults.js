@@ -19,7 +19,7 @@ const AddDriveResults = () => {
   const [resultDetail, setResultDetail] = useState({
     companyName: !companyName ? "" : companyName,
     batch: !batch ? "" : batch,
-    round: "",
+    roundNumber: "",
   });
 
   //boolean state for resultupload
@@ -45,7 +45,7 @@ const onHandleSubmit =(event)=>{
     addDriveResult(resultDetail).then((res)=>{
         console.log(res);
         if(res.Success){
-            window.alert(res.Message);
+            window.alert(res.data.Message);
             setSpinner(false);
             setBoolResult(true);
         }
@@ -179,7 +179,7 @@ const onHandleSubmit =(event)=>{
                <Col sm={5}>
                  <Form.Control
                    type="number"
-                   value={resultDetail.round}
+                   value={resultDetail.roundNumber}
                    name="round"
                    onChange={OnHandleChange}
                    placeholder="Enter The Round No-(eg : 1 (or) 2)"

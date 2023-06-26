@@ -481,6 +481,22 @@ form{
 
 }
 
+/* profile image */
+
+.userProfileImg{
+  height:340px;
+  width:340px
+}
+
+@media only screen and (max-width: 600px) {
+  .userProfileImg{
+     width:190px;
+     height: 190px; 
+     margin-left: 11%;
+  }
+
+}
+
 
 
 
@@ -541,6 +557,12 @@ form{
   background: linear-gradient(45deg,#FF5370,#ff869a);
 }
 
+/* Graduate Card Main Home Page*/
+/* .graduateCard{
+
+  border-radius: 8px;
+  box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+} */
 
 .dashboardCard {
   border-radius: 5px;
