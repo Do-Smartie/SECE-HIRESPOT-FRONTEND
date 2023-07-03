@@ -115,9 +115,13 @@ const ShowCompanies = () => {
     setSpinner(true);
     getBatchwiseCompanies(neededBatch)
       .then((res) => {
-        if (res.Success) {
-          setCompanines(res.data);
+        if (res.data.Success) {
+          setCompanines(res.data.Data);
+          console.log(companies,res.data.Data);
           setSpinner(false);
+        }
+        else{
+          window.alert(res.data.Message);
         }
       })
       .catch((err) => {
@@ -180,7 +184,7 @@ const ShowCompanies = () => {
                 <span className="visually-hidden">Loading...</span>
               </Spinner>
             ) : (
-              <CompaniesTable TableData={DummyCompanies} />
+              <CompaniesTable TableData={companies} />
             )}
           </Card>
         </Row>

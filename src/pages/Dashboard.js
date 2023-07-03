@@ -11,9 +11,9 @@ import Plot from "react-plotly.js";
 const Dashboard = () => {
   const navigate = useNavigate();
   var [count, setCount] = useState({
-    studentCount: 400,
-    facultyCount: 200,
-    companiesCount: 250,
+    studentCount: '',
+    facultyCount: '',
+    companiesCount: '',
   });
 
   useEffect(() => {
@@ -21,13 +21,13 @@ const Dashboard = () => {
       .then((res) => {
         console.log(res.data);
         var data = res.data.count;
-        if (res.Success && res.data.count != null) {
-          count = data;
-          setCount(count);
+        if (res.data.Success) {
+          setCount({studentCount:res.data.Student_Count,facultyCount:res.data.Faculty_User,companiesCount:res.data.Company_Count});
         }
       })
       .catch((err) => {
         console.log(err);
+        Window.alert(err.response.data.Message);
         // navigate('/404pageNotFound');
       })
       .finally(() => {

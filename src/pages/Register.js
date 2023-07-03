@@ -133,30 +133,6 @@ const Register = () => {
                   <div className="row">
                     <input
                       type="text"
-                      name="regNo"
-                      onChange={OnHandleChange}
-                      value={registerData.regNo}
-                      id="regNo"
-                      className="form__input"
-                      placeholder="Register Number"
-                      required
-                    />
-                  </div>
-                  <div className="row">
-                    <input
-                      type="text"
-                      name="rollNo"
-                      onChange={OnHandleChange}
-                      value={registerData.rollNo}
-                      id="rollNo"
-                      className="form__input"
-                      placeholder="Roll Number(20IT014)"
-                      required
-                    />
-                  </div>
-                  <div className="row">
-                    <input
-                      type="text"
                       name="department"
                       onChange={OnHandleChange}
                       value={registerData.department}
@@ -176,7 +152,31 @@ const Register = () => {
                     </select>
                   </div>
                   {registerData.userType === "Student" && (
+                    <>
                      <div className="row">
+                    <input
+                      type="text"
+                      name="rollNo"
+                      onChange={OnHandleChange}
+                      value={registerData.rollNo}
+                      id="rollNo"
+                      className="form__input"
+                      placeholder="Roll Number(20IT014)"
+                      required
+                    />
+                  </div>
+                   <div className="row">
+                    <input
+                      type="text"
+                      name="regNo"
+                      onChange={OnHandleChange}
+                      value={registerData.regNo}
+                      id="regNo"
+                      className="form__input"
+                      placeholder="Register Number"
+                    />
+                  </div>
+                  <div className="row">
                      <input
                        type="text"
                        name="batch"
@@ -188,6 +188,21 @@ const Register = () => {
                        required
                      />
                    </div>
+                   </>
+                  )}
+                  {registerData.userType==='Faculty' && (
+                    <div className="row">
+                    <input
+                      type="text"
+                      name="rollNo"
+                      onChange={OnHandleChange}
+                      value={registerData.rollNo}
+                      id="rollNo"
+                      className="form__input"
+                      placeholder="Employee Number"
+                      required
+                    />
+                  </div>
                   )}
                  
                   {loading ? (

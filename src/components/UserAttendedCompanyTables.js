@@ -21,7 +21,6 @@ const UserAttendedCompanyTables = (props)=>{
         return (
             <tr  className="tableRow" key={item._id} >
                 <td>{i+1}</td>
-                <td>{item.dateOfDrive}</td>
                 <td>{item.companyName}</td>
                 <td>{item.role}</td>
                 <td>{item.Package}</td>

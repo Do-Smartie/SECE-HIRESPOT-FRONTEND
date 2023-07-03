@@ -76,11 +76,11 @@ const MainHome = () => {
             <img src="/Box.png" alt="BoxImg" className="mobImage"></img>
           </div>
         </Col>
-        <Col className="justify-content-end">
+        <Col md="auto">
           <img src="/Line3.jpg" alt="line" className="image"></img>
         </Col>
         { !isAuthenticated() ? (
-             <Col>
+             <Col sm>
              <div className="parent">
                <Button
                  className="bottom-left"
@@ -105,19 +105,51 @@ const MainHome = () => {
              </div>
            </Col>
         ):(
-           <Col style={{marginTop:"1%",marginLeft:'2%'}}  >
-           
-           {/* <img src="gotocompanies1.avif" alt="gotoCompanies1" className="floating"></img>
-           <img src="gotocompanies.jpg" alt="gotoCompanies" className="floating"></img> */}
-           <div>
-            <h4 style={{ color: "#004E9B" }} className="mobHead">
-                <strong>Awesome Placement Record</strong>
+           <Col style={{marginTop:"3%"}} sm className="mobImage"  >
+            <div  style={{textAlign:"left",marginLeft:"5%"}}>
+            <div>
+            <h4 style={{ color: "#004E9B" }}>
+                <strong> Going Beyond the Imagination,</strong>
             </h4>
           </div>
-          <div  style={{marginTop:"23%"}}>
-            <ChartsGraph/>
+          <div style={{ marginTop: "6%" }}>
+            <h1
+              style={{
+                color: "#004E9B",
+                fontSize: "63px",
+                fontFamily: "inherit",
+                fontWeight: "800",
+                textShadow: "4px 4px 4px rgba(0, 0, 0, 0.25)",
+              }}
+            >
+              
+            <strong><span style={{color:"red"}}>S</span>haping <span style={{color:"red"}}>E</span>ngineers <span style={{color:"red"}}>C</span>reating <span style={{color:"red"}}>E</span>xcellence!</strong>
+             
+            </h1>
           </div>
-           {/* <Link to='/home'><h3  style={{paddingTop:"1px"}} className="floating">GO TO COMPANIES</h3></Link> */}
+          <div style={{ marginTop: "4%" }}>
+            <p
+              style={{
+                color: "#004E9B",
+                fontFamily: "Inter",
+                fontWeight: "800",
+                fontSize: "18px",
+              }}
+            >
+              Coming Together is a Beginning, Keeping Together is Progress, Working Togehter is <span style={{color:"red"}}>Success</span>
+            </p>
+          </div>
+          <div style={{ marginTop: "8%" }}>
+            <h5 
+            style={{
+              color: "#004E9B",
+              fontSize: "46px",
+              fontFamily: "inherit",
+              fontWeight: "800",
+              textShadow: "4px 4px 4px rgba(0, 0, 0, 0.25)",
+            }}> Stay Connected!</h5>
+          </div>
+          </div>
            </Col>
            
         )}

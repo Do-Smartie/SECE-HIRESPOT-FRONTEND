@@ -57,8 +57,8 @@ const UserAttendedCompanies = () => {
     getUserCompanyDetails(studentData)
       .then((res) => {
         console.log(res);
-        if (res.Success) {
-          setAttendedCompanies(res.data);
+        if (res.data.Success) {
+          setAttendedCompanies(res.data.CompanyData);
           setBoolConfirm(false);
         }
       })
@@ -82,8 +82,8 @@ const UserAttendedCompanies = () => {
     if (window.confirm(text) == true) {
       deleteUser(data)
         .then((res) => {
-          if (res.Success) {
-            window.alert(res.Message);
+          if (res.data.Success) {
+            window.alert(res.data.Message);
             navigate("/showStudents");
             setBoolRemoveButton(false);
           }
@@ -161,7 +161,7 @@ const UserAttendedCompanies = () => {
                 <span className="visually-hidden">Loading...</span>
               </Spinner>
             ) : (
-              <UserAttendedCompanyTables TableData={DummyCompanies} />
+              <UserAttendedCompanyTables TableData={attendedCompanies} />
             )}
           </Card>
         </Row>

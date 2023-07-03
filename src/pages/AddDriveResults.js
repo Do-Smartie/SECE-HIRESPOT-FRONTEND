@@ -14,17 +14,18 @@ import PdfFile from '../services/DownloadPDF';
 
 const AddDriveResults = () => {
   const location = useLocation();
-  const { companyName, batch } = location.state || {};
+  const { companyName, batch , role} = location.state || {};
 
   const [resultDetail, setResultDetail] = useState({
     companyName: !companyName ? "" : companyName,
     batch: !batch ? "" : batch,
-    roundNumber: "",
+    roundNumber:"",
+    role : role
   });
 
   //boolean state for resultupload
 
-  const [boolResult, setBoolResult] = useState(true);
+  const [boolResult, setBoolResult] = useState(false);
 
 //onchange logic for resultDetails
 
@@ -44,14 +45,14 @@ const onHandleSubmit =(event)=>{
     setSpinner(true);
     addDriveResult(resultDetail).then((res)=>{
         console.log(res);
-        if(res.Success){
+        if(res.data.Success){
             window.alert(res.data.Message);
             setSpinner(false);
             setBoolResult(true);
         }
     }).catch((err)=>{
         console.log(err);
-        window.alert("Error occurred in Proceeding - Try Again");
+        window.alert(err.response.data.Message);
     }).finally(()=>{
         console.log("process over");
         setSpinner(false);
@@ -110,14 +111,14 @@ const onHandleSubmit =(event)=>{
         );
         
         uploadResults(formData).then((res)=>{
-           if(res.Success){
-            window.alert(res.Message);
+           if(res.data.Success){
+            window.alert(res.data.Message);
             setBoolResult(false);
             setSpinner(false);
            }
         }).catch((err)=>{
           console.log(err);
-          window.alert("There is Problem in Uploading File, So Try Again");
+          window.alert(err.response.data.Message);
     
         }).finally(()=>{
           console.log("process over");
@@ -180,7 +181,7 @@ const onHandleSubmit =(event)=>{
                  <Form.Control
                    type="number"
                    value={resultDetail.roundNumber}
-                   name="round"
+                   name="roundNumber"
                    onChange={OnHandleChange}
                    placeholder="Enter The Round No-(eg : 1 (or) 2)"
                    required

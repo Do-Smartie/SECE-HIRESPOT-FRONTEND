@@ -17,11 +17,14 @@ const DownloadResult = (props) => {
     const[resultDetail,setResultDetail] = useState({
         companyName : !props ? '' : props.companyName,
         batch : !props ? '' : props.batch,
+        role : !props ? '':props.role,
         roundNumber : ''
+        
     });
     
     const[spinner,setSpinner] = useState(false);
-    console.log(props.companyName,props.batch);
+    console.log(props.companyName,props.batch,props.role);
+    console.log(resultDetail);
     
     const OnHandleChange =(event)=>{
         const{name,value} = event.target;
@@ -31,11 +34,14 @@ const DownloadResult = (props) => {
 
     const onHandleSubmit = (event)=>{
         event.preventDefault();
+        resultDetail.role = props.role;
+        setResultDetail({...resultDetail})
         console.log(resultDetail);
         
         setSpinner(true);
         downloadDriveResult(resultDetail).then((res)=>{
             console.log(res);
+            window.location.href = process.env.REACT_APP_BACKEND_API+"/sece/results/"+res.data;
             setSpinner(false);
         }).catch((err)=>{
             console.log(err);
@@ -93,7 +99,7 @@ const DownloadResult = (props) => {
               <Form.Control
                 type="number"
                 value={resultDetail.roundNumber}
-                name="round"
+                name="roundNumber"
                 onChange={OnHandleChange}
                 placeholder="Enter The Round No-(eg : 1 (or) 2)"
                 required
@@ -119,8 +125,8 @@ const DownloadResult = (props) => {
               </Col>
               <Col>
               {isadmin && props ?(
-               <Link to="/addDriveResults" state={{companyName:props.companyName,batch:props.batch}}>
-                 <Button variant="primary" type="submit">
+               <Link to="/addDriveResults" state={{companyName:props.companyName,batch:props.batch,role:props.role}}>
+                 <Button variant="primary" >
                     ADD RESULSTS
                   </Button>
                </Link>

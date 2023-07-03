@@ -6,11 +6,11 @@ import DownloadResult from "../components/DownloadResult";
 const SingleCompanyResults = ()=>{
     
     const location = useLocation();
-    const{companyName,batch} = location.state || {};
+    const{companyName,batch,role} = location.state || {};
     return(
         <>
          <MainNavbar />
-         <DownloadResult companyName={companyName} batch={batch}/>
+         <DownloadResult companyName={companyName} batch={batch} role={role}/>
         </>
     );
 }

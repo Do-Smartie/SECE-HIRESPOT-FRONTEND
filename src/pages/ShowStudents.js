@@ -151,9 +151,16 @@ const ShowStudents = () => {
     
     getStudents(neededBatch).then((res)=>{
       console.log(res);
-      if(res.Success){
+      if(res.data.Success){
          setStudents(res.data.Data);
+        //  if(students.length===0){
+        //   window.alert("No Users Found for this particular batch");
+        //   return;
+        //  }
          setBoolConfirm(false);
+      }
+      else{
+        window.alert(res.data.Message);
       }
     }).catch((err)=>{
        window.alert(err.response.data.Message);

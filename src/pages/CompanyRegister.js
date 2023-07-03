@@ -12,7 +12,7 @@ import { registerToCompany } from "../services/postRequest";
 const CompanyRegister = ()=>{
      
     const location = useLocation();
-    const {_id,companyName,role,Package} = location.state;
+    const {_id,companyName,role,Package,batch} = location.state;
     // console.log(id,companyName);
 
     const navigate = useNavigate();
@@ -26,6 +26,7 @@ const CompanyRegister = ()=>{
         role :role,
         companyName:companyName,
         Package : Package,
+        batch:batch,
         registerNumber:'',
         rollNumber:'',
         name : '',
@@ -62,16 +63,19 @@ const CompanyRegister = ()=>{
         setSpinner(true);
         registerToCompany(applicant).then((res)=>{
             console.log(res);
-            if(res.Message == "Registration Successfull"){
+            if(res.data.Success){
                 setSpinner(false);
-                let assume = window.prompt("Registration Completed Successfully");
+                let assume = window.prompt(res.data.Message);
                 if(assume!=null){
                     navigate('/home'); 
                 }
             }
+            else{
+                window.alert(res.data.Message);
+            }
         }).catch((err)=>{
             console.log(err);
-            let assume = window.alert("Error : Try Again ");
+            window.alert(err.response.data.Message);
         }).finally(()=>{
             setSpinner(false);
         })
@@ -82,6 +86,7 @@ const CompanyRegister = ()=>{
                 role :role,
                 companyName:companyName,
                 Package : Package,
+                batch:batch,
                 registerNumber:'',
                 rollNumber:'',
                 name : '',

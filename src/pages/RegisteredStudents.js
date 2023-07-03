@@ -77,6 +77,7 @@ const RegisteredStudents = () => {
    const location = useLocation();
    
    const{company} = location.state;
+   console.log(company.companyName);
 
    //state for students
    const[registerdStudents,setRegisteredStudents] = useState([]);
@@ -91,14 +92,14 @@ const RegisteredStudents = () => {
    useEffect(()=>{
         
        const data = {
-        comapnyName : company.companyName,
+        companyName : company.companyName,
         role : company.role,
         batch : company.batch
        }
        setSpinner(true);
        getRegisteredStudents(data).then((res)=>{
            if(res.data.Success){
-             setRegisteredStudents(res.data);  
+             setRegisteredStudents(res.data.StudentDetails);  
              setSpinner(false);
            }
        }).catch((err)=>{

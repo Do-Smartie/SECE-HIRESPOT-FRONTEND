@@ -10,17 +10,37 @@ import Card from "react-bootstrap/esm/Card";
 import Container from "react-bootstrap/esm/Container";
 import { getUser } from "../services/getRequset";
 import { updateUser } from "../services/postRequest";
+import { isAdmin } from "../services/Auth";
 
 const Profile = () => {
 
   
  const[user,setUser] = useState({
+    id:'',
     username:'',
     email: '',
     password: "",
     regNo: "",
     batch : '',
-    department : ''
+    department : '',
+    userType : '',
+    rollNo :'',
+    RegistrationCompanyCount:'',
+    oldUserName :''
+  });
+
+  const[newUser,setNewUser] = useState({
+    id:'',
+    username:'',
+    email: '',
+    password: "",
+    regNo: "",
+    batch : '',
+    department : '',
+    userType : '',
+    rollNo :'',
+    RegistrationCompanyCount:'',
+    oldUserName :''
   });
 
   const[edit,setEdit] = useState(false);
@@ -33,8 +53,11 @@ const Profile = () => {
         console.log(res);
         if(res.data.Success){
 
-            var data = res.data;
-            setUser({data});
+            var data = res.data.Data[0];
+            setUser({...data});
+            setNewUser({...data});
+            console.log(user);
+            console.log(newUser);
         }
       }).catch((err)=>{
         console.log(err);
@@ -45,19 +68,23 @@ const Profile = () => {
 
   //updating user deatails
 
+  
+  
+  
+
   const OnHandleChange = (event)=>{
 
     const{name,value} = event.target;
 
-    setUser({...user,[name]:value});
+    setNewUser({...newUser,[name]:value});
   }
 
   const onHandleSubmit = (event)=>{
     event.preventDefault();
 
-    console.log(user);
+    console.log(newUser);
     setSpinner(true);
-    updateUser(user).then((res)=>{
+    updateUser(newUser).then((res)=>{
         console.log(res);
         if(res.data.Success){
             window.alert(res.data.Message);
@@ -106,7 +133,16 @@ const Profile = () => {
                           </span>{" "}
                           {user.email}
                         </li>
-                        <li class="mb-2 mb-xl-3 display-28">
+                        {sessionStorage.getItem('userType')=='Faculty' || sessionStorage.getItem('userType')=='Admin' ? (
+                          <li class="mb-2 mb-xl-3 display-28">
+                          <span class="display-26 text-secondary me-2 font-weight-600">
+                            Employee Number :
+                          </span>{" "}
+                          {user.rollNo}
+                         </li>
+                        ):(
+                          <>
+                           <li class="mb-2 mb-xl-3 display-28">
                           <span class="display-26 text-secondary me-2 font-weight-600">
                             Register Number:
                           </span>{" "}
@@ -118,6 +154,15 @@ const Profile = () => {
                           </span>{" "}
                           {user.batch}
                         </li>
+                        <li class="mb-2 mb-xl-3 display-28">
+                          <span class="display-26 text-secondary me-2 font-weight-600">
+                           Registered Companies:
+                          </span>{" "}
+                          {user.RegistrationCompanyCount}
+                        </li>
+                          </>
+                        )}
+                        
                         <li class="display-28">
                           <span class="display-26 text-secondary me-2 font-weight-600">
                             Department:
@@ -174,7 +219,7 @@ const Profile = () => {
               <Col sm={5}>
                 <Form.Control
                   type="text"
-                  value={user.username}
+                  value={newUser.username}
                   name="username"
                   onChange={OnHandleChange}
                   placeholder="Enter the User name"
@@ -189,7 +234,7 @@ const Profile = () => {
               <Col sm={5}>
                 <Form.Control
                   type="text"
-                  value={user.password}
+                  value={newUser.password}
                   name="password"
                   onChange={OnHandleChange}
                   placeholder="Enter the new password"
@@ -204,7 +249,7 @@ const Profile = () => {
               <Col sm={5}>
                 <Form.Control
                   type="email"
-                  value={user.email}
+                  value={newUser.email}
                   name="email"
                   onChange={OnHandleChange}
                   placeholder="Enter Your EmailID"
@@ -219,7 +264,7 @@ const Profile = () => {
               <Col sm={5}>
                 <Form.Control
                   type="text"
-                  value={user.department}
+                  value={newUser.department}
                   name="department"
                   onChange={OnHandleChange}
                   placeholder="Enter Your Department(Eg- Information Technology)"
@@ -234,7 +279,7 @@ const Profile = () => {
               <Col sm={5}>
                 <Form.Control
                   type="text"
-                  value={user.batch}
+                  value={newUser.batch}
                   name="batch"
                   onChange={OnHandleChange}
                   placeholder="Enter Ypur Bacth(Eg - 2020-2024)"
@@ -249,7 +294,7 @@ const Profile = () => {
               <Col sm={5}>
                 <Form.Control
                   type="text"
-                  value={user.regNo}
+                  value={newUser.regNo}
                   name="regNo"
                   onChange={OnHandleChange}
                   placeholder="Enter Ypur Register No"

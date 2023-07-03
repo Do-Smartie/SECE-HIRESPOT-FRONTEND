@@ -24,7 +24,7 @@ const CompanyCard = (props) => {
       return (
         <>
           <Col xs={6}>
-          <Link to='/singleCompanyresult' state={{companyName:companyName,batch:batch}}>
+          <Link to='/singleCompanyresult' state={{companyName:companyName,batch:batch,role:role}}>
             <Button variant="outline-success" size="sm">Results</Button>
             </Link>
           </Col>
@@ -40,7 +40,7 @@ const CompanyCard = (props) => {
         <>
           <Col xs={6}></Col>
           <Col xs={6} style={{ textAlign: "right" }}>
-            <Link to='/singleCompanyresult' state={{companyName:companyName,batch:batch}}>
+            <Link to='/singleCompanyresult' state={{companyName:companyName,batch:batch,role:role}}>
             <Button variant="outline-success" size="sm">Results</Button>
             </Link>
             

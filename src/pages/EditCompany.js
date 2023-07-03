@@ -28,7 +28,7 @@ const EditCompany = (props)=>{
     //state for company deatails
   const [companyDetails, setCompanyDetails] = useState(
     { 
-      id : currCompany._id,
+      _id : currCompany._id,
       companyName: currCompany.companyName,
       role: currCompany.role,
       Package: currCompany.Package,
@@ -63,8 +63,8 @@ const EditCompany = (props)=>{
     editCompany(companyDetails)
       .then((res) => {
         console.log(res);
-        if(isCompanyUpdated(res.Message)){
-            window.alert(res.Message);
+        if(isCompanyUpdated(res.data.Message)){
+            window.alert(res.data.Message);
             setSpinner(false);
             navigate("/home");
         }
@@ -136,7 +136,7 @@ const EditCompany = (props)=>{
               <Col sm={5}>
                 <Form.Control
                   type="text"
-                  value={companyDetails.package}
+                  value={companyDetails.Package}
                   name="Package"
                   onChange={OnHandleChange}
                   placeholder="Enter The Package-(eg : 12LPA (or) 12L-CTC)"

@@ -58,10 +58,11 @@ const Faculty = () => {
     setSpinner(true);
     getFaculties()
       .then((res) => {
-        if (res.Success) {
-          setFaculty(res.data);
+        if (res.data.Success) {
+          setFaculty(res.data.FacultyData);
           setSpinner(false);
         }
+        
       })
       .catch((err) => {
         console.log(err);
@@ -200,7 +201,7 @@ const Faculty = () => {
                       </TableCell>
                     </TableRow>
                   )}
-                  {table.map((row) => {
+                  {faculty.map((row) => {
                     return (
                       <TableRow
                         className="tableRow"
