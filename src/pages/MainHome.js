@@ -26,11 +26,11 @@ const MainHome = () => {
   };
 
   const [counts, setCounts] = useState({
-    batch: "2024",
-    placed: 96,
-    nonPlaced: 490,
-    pipelinedCompanies: 10,
-    completedCompanies: 48,
+    batch: "",
+    placed: 0,
+    nonPlaced: 0,
+    pipelinedCompanies: 0,
+    completedCompanies: 0,
   });
   const [placedCount, setPlacedCount] = useState(0);
   const [nonPlacedCount, setNonPlacedCount] = useState(0);
