@@ -9,5 +9,5 @@ export const isComapanyAdded = (Success)=>{
 
 export const isCompanyUpdated = (message)=>{
 
-    return message === "company updated successfully"?true:false;
+    return message === "Company Details Updated Successfully..."?true:false;
 }

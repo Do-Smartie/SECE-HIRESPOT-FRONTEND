@@ -7,9 +7,10 @@ import { useLocation } from "react-router-dom";
 import dayjs from "dayjs";
 import Col from "react-bootstrap/esm/Col";
 import Card from "react-bootstrap/esm/Card";
-import { getRegisteredStudents } from "../services/postRequest";
+import { getPlacedStudents } from "../services/postRequest";
 import Spinner from 'react-bootstrap/Spinner';
-import RegisteredStudentsTable from "../components/RegisteredStudentsTable";
+import PlacedStudentsTable from "../components/PlacedStudentsTable";
+
 
 const dummyStudents = [
     {
@@ -71,7 +72,7 @@ const dummyStudents = [
       }
 ]
 
-const RegisteredStudents = () => {
+const PlacedStudents = () => {
 
 
    const location = useLocation();
@@ -80,7 +81,7 @@ const RegisteredStudents = () => {
    console.log(company.companyName);
 
    //state for students
-   const[registerdStudents,setRegisteredStudents] = useState([]);
+   const[placedStudents,setPlacedStudents] = useState([]);
 
    //boolstate for spinner
 
@@ -97,9 +98,9 @@ const RegisteredStudents = () => {
         batch : company.batch
        }
        setSpinner(true);
-       getRegisteredStudents(data).then((res)=>{
+       getPlacedStudents(data).then((res)=>{
            if(res.data.Success){
-             setRegisteredStudents(res.data.StudentDetails);  
+            setPlacedStudents(res.data.StudentDetails);  
              setSpinner(false);
            }
        }).catch((err)=>{
@@ -158,7 +159,7 @@ const RegisteredStudents = () => {
               </h7>
               <br></br>
               <h7 style={{ textTransform: "uppercase" }} className="text2">
-                <strong>Registered count : {registerdStudents.length}</strong>
+                <strong>Registered count : {placedStudents.length}</strong>
               </h7>
               <br></br>
             </div>
@@ -172,14 +173,14 @@ const RegisteredStudents = () => {
         </Row>
         <Row style={{marginTop:"4%"}}>
             <Card>
-            <h5 style={{marginLeft:"3%"}}>Registered Students</h5>
+            <h5 style={{marginLeft:"3%"}}>Placed Students</h5>
             <hr style={{ border: "3px solid #004E9B", borderRadius: "5px" }}></hr>
             {spinner ? (
                 <Spinner animation="border" role="status" style={{marginLeft:"50%"}}>
                 <span className="visually-hidden">Loading...</span>
               </Spinner>
             ):(
-               <RegisteredStudentsTable TableData={registerdStudents} comapnyName = {company.comapnyName}/>
+               <PlacedStudentsTable TableData={placedStudents} comapnyName = {company.comapnyName}/>
             )}
             </Card> 
         </Row>
@@ -188,4 +189,4 @@ const RegisteredStudents = () => {
   );
 };
 
-export default RegisteredStudents;
+export default PlacedStudents;

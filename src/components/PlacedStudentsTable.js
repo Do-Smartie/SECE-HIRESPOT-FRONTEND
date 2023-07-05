@@ -1,6 +1,4 @@
-import React, { useState} from "react";
-import "../App.css";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import Col from "react-bootstrap/esm/Col";
 import Button from "react-bootstrap/esm/Button";
 import { exportAsXLSX } from "../services/ExcelFileDownload";
@@ -15,19 +13,20 @@ import {
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import { Funnel, FunnelFill } from "react-bootstrap-icons";
-
-const CompaniesTable = (props) => {
-  const [schema, setSchema] = useState({
-    companyName: "",
-    dateOfDrive: "",
-    batch: "",
-    role: "",
-    Package: "",
-    category :""
-  });
+import { useState } from "react";
 
 
-   //boolstate for filter
+const PlacedStudentsTable = (props)=>{
+
+    const [schema, setSchema] = useState({
+        regNo:'',
+        rollNo:'',
+        fullName : '',
+        department : '',
+        batch:''
+      });
+    
+      //boolstate for filter
   const [boolFilter, setBoolFilter] = useState(false);
 
   function filter(attr, value) {
@@ -43,32 +42,24 @@ const CompaniesTable = (props) => {
   else
   table = props.TableData.filter((row) => {
     return (
-      row.dateOfDrive.toLowerCase().indexOf(schema.dateOfDrive) === 0 &&
-      row.Package.toLowerCase().indexOf(schema.Package) === 0 &&
-      row.role.toLowerCase().indexOf(schema.role) === 0 &&
-      row.companyName.toLowerCase().indexOf(schema.companyName) === 0 &&
-      row.batch.toLowerCase().indexOf(schema.batch) === 0 &&
-      row.category.toLowerCase().indexOf(schema.category) === 0
+      row.fullName.toLowerCase().indexOf(schema.fullName) === 0 &&
+      row.regNo.toLowerCase().indexOf(schema.regNo) === 0 &&
+      row.rollNo.toLowerCase().indexOf(schema.rollNo) === 0 &&
+      row.department.toLowerCase().indexOf(schema.department) === 0 &&
+      row.batch.toLowerCase().indexOf(schema.batch) === 0 
     );
   })
-
-  
-
-  const navigate = useNavigate();
-  const gotoCompany = (company) => {
-    navigate("/placedStudents", { state: { company: company } });
-  };
 
   //logic for downloading detail as excel file
 
   const downlaodXLSX = () => {
    
-    exportAsXLSX(table, table[0].batch);
+    exportAsXLSX(table, props.companyName);
   };
- 
-  return (
-    <Container>
-      <Row style={{marginTop:'3%'}}>
+
+    return(
+        <Container>
+      <Row>
         <Col>{boolFilter ? <Button onClick={()=>setBoolFilter(false)} variant="outline-primary"><strong><FunnelFill  /><span>  Filter</span></strong></Button>  : <Button onClick={()=>setBoolFilter(true)} variant="outline-primary"><strong><Funnel /><span>   Filter</span></strong></Button> }</Col>
         <Col style={{ textAlign: "right" }}>
           <Button
@@ -84,45 +75,44 @@ const CompaniesTable = (props) => {
         <TableContainer>
           <Table>
             <TableHead>
-              <TableCell><strong>Date</strong></TableCell>
-              <TableCell><strong>Company Name</strong></TableCell>
-              <TableCell><strong>Package</strong></TableCell>
-              <TableCell><strong>Role</strong></TableCell>
+              <TableCell><strong>Name</strong></TableCell>
+              <TableCell><strong>Register No</strong></TableCell>
+              <TableCell><strong>Roll No</strong></TableCell>
+              <TableCell><strong>Deparment</strong></TableCell>
               <TableCell><strong>Batch</strong></TableCell>
-              <TableCell><strong>Category</strong></TableCell>
             </TableHead>
             <TableBody>
               {boolFilter && (
                 <TableRow>
                   <TableCell>
                     <input
-                      placeholder="Date"
+                      placeholder="Student Name"
                       onChange={(event) => {
-                        filter("dateOfDrive", event.target.value);
+                        filter("fullName", event.target.value);
                       }}
                     />
                   </TableCell>
                   <TableCell>
                     <input
-                      placeholder="Comapany Name"
+                      placeholder="Register No"
                       onChange={(event) => {
-                        filter("companyName", event.target.value);
+                        filter("regNo", event.target.value);
                       }}
                     />
                   </TableCell>
                   <TableCell>
                     <input
-                      placeholder="Package"
+                      placeholder="Roll No"
                       onChange={(event) => {
-                        filter("Package", event.target.value);
+                        filter("rollNo", event.target.value);
                       }}
                     />
                   </TableCell>
                   <TableCell>
                     <input
-                      placeholder="Role"
+                      placeholder="Department"
                       onChange={(event) => {
-                        filter("role", event.target.value);
+                        filter("department", event.target.value);
                       }}
                     />
                   </TableCell>
@@ -134,25 +124,16 @@ const CompaniesTable = (props) => {
                       }}
                     />
                   </TableCell>
-                  <TableCell>
-                    <input
-                      placeholder="Category"
-                      onChange={(event) => {
-                        filter("category", event.target.value);
-                      }}
-                    />
-                  </TableCell>
                 </TableRow>
               )}
               {table.map((row) => {
                 return (
-                  <TableRow className="tableRow" onClick={() => gotoCompany(row)}>
-                    <TableCell>{row.dateOfDrive}</TableCell>
-                    <TableCell>{row.companyName}</TableCell>
-                    <TableCell>{row.Package}</TableCell>
-                    <TableCell>{row.role}</TableCell>
+                  <TableRow className="tableRow" >
+                    <TableCell>{row.fullName}</TableCell>
+                    <TableCell>{row.regNo}</TableCell>
+                    <TableCell>{row.rollNo}</TableCell>
+                    <TableCell>{row.department}</TableCell>
                     <TableCell>{row.batch}</TableCell>
-                    <TableCell>{row.category}</TableCell>
                   </TableRow>
                 );
               })}
@@ -161,7 +142,7 @@ const CompaniesTable = (props) => {
         </TableContainer>
       </Row>
     </Container>
-  );
-};
+    );
+}
 
-export default CompaniesTable;
+export default PlacedStudentsTable;

@@ -20,10 +20,14 @@ import ShowStudents from "./pages/ShowStudents";
 import UserAttendedCompanies from "./pages/UserAttendedCompanies";
 import Faculty from "./pages/showFaculty";
 import FacultiesProfiles from "./components/FacultiesProfiles";
-import ShowCompanies from "./pages/ShowCompanies";
 import RegisteredStudents from "./pages/RegisteredStudents";
 import { isAuthenticated } from "./services/Auth";
 import FotgotPassword from "./pages/FotgotPassword";
+import ProtectedFacultyPCRoute from "./services/protectedRoutes/protectedFacultyPCRoute";
+import AddPlacedStudents from "./pages/addPlacedStudents";
+import ShowPipelinedCompanies from "./pages/ShowPiplinedCompanies";
+import ShowCompletedCompanies from "./pages/showCompletedCompanies";
+import PlacedStudents from "./pages/PlacedStudents";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -50,6 +54,17 @@ function App() {
           <Route path="/singleCompanyresult" element={<SingleCompanyResults />} />
           <Route path="/profile" element={<Profile />} exact />
         </Route>
+        <Route element={<ProtectedFacultyPCRoute />}>
+
+          <Route path="/addPlacedStudents" element={<AddPlacedStudents />}/>
+          <Route path="/dashboard" element={<Dashboard />}/>
+          <Route path="/showStudents" element={<ShowStudents />  }/>
+          <Route path="/userAttendedCompanies" element={<UserAttendedCompanies />} />
+          <Route path="/showPipelinedCompanies" element={<ShowPipelinedCompanies />} />
+          <Route path="/showCompletedCompanies" element={<ShowCompletedCompanies />}/>
+          <Route path="/registeredStudents" element={<RegisteredStudents />}/>
+          <Route path="/placedStudents" element={<PlacedStudents />}/>
+        </Route>
         <Route element={<ProtectedAdminRoutes />}>
           <Route path="/addCompanies" element={<AddCompanies />} exact/>
           <Route
@@ -62,8 +77,10 @@ function App() {
           <Route path="/userAttendedCompanies" element={<UserAttendedCompanies />} />
           <Route path="/showFaculties" element={<Faculty />}/>
           <Route path="/showFaultiesProfiles" element={<FacultiesProfiles />}/>
-          <Route path="/showCompanies" element={<ShowCompanies />} />
+          <Route path="/showPipelinedCompanies" element={<ShowPipelinedCompanies />} />
+          <Route path="/showCompletedCompanies" element={<ShowCompletedCompanies />}/>
           <Route path="/registeredStudents" element={<RegisteredStudents />}/>
+          <Route path="/placedStudents" element={<PlacedStudents />}/>
         </Route>
       </Routes>
       <Footer />

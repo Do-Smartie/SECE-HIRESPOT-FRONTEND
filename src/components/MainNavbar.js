@@ -4,7 +4,6 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { useState } from "react";
 import { isAdmin, isAuthenticated } from "../services/Auth";
 import { logOut } from "../services/getRequset";
@@ -15,6 +14,11 @@ const MainNavbar = () => {
   const [wid, setWid] = useState("18px");
 
   const navigate = useNavigate();
+
+  //var for bool isFacultyPC
+
+  var isFacultyPC = sessionStorage.getItem('userType')==='FacultyPC';
+  // var isFacultyPC = true;
 
   //logic for logout
   const logout = async ()=>{
@@ -72,6 +76,11 @@ const MainNavbar = () => {
             </Nav.Link> 
             )}
             {isAuthenticated() && isAdmin() && (
+              <Nav.Link as={Link} to="/dashboard" className="navLink" active>
+              <strong>DASHBOARD</strong> 
+              </Nav.Link>
+            )}
+            {isAuthenticated() && isFacultyPC && (
               <Nav.Link as={Link} to="/dashboard" className="navLink" active>
               <strong>DASHBOARD</strong> 
               </Nav.Link>

@@ -6,28 +6,35 @@ import Col from "react-bootstrap/esm/Col";
 import { getCounts } from "../services/getRequset";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
-import Plot from "react-plotly.js";
+import { isAdmin } from "../services/Auth";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   var [count, setCount] = useState({
-    studentCount: 400,
-    facultyCount: 200,
-    companiesCount: 250,
+    placedCount: "",
+    studentCount: "",
+    facultyCount: "",
+    piplinedCompaniesCount: "",
+    completedCompaniesCount: "",
   });
 
   useEffect(() => {
     getCounts()
       .then((res) => {
         console.log(res.data);
-        var data = res.data.count;
-        if (res.Success && res.data.count != null) {
-          count = data;
-          setCount(count);
+        if (res.data.Success) {
+          setCount({
+            placedCount: res.data.Placed_Count,
+            studentCount: res.data.Student_Count,
+            facultyCount: res.data.Faculty_User,
+            piplinedCompaniesCount: res.data.PiplinedCompanies_Count,
+            completedCompaniesCount: res.data.CompletedCompanies_Count,
+          });
         }
       })
       .catch((err) => {
         console.log(err);
+        Window.alert(err.response.data.Message);
         // navigate('/404pageNotFound');
       })
       .finally(() => {
@@ -40,6 +47,22 @@ const Dashboard = () => {
       <MainNavbar />
       <Container style={{ marginTop: "4%" }}>
         <Row>
+          {sessionStorage.getItem("userType") === "FacultyPC" ? (
+            <Col>
+              <div
+                className="dashboardCard bg-c-green order-card"
+                onClick={() => navigate("/addPlacedStudents")}
+              >
+                <div className="card-block">
+                  <h6 className="m-b-20">ADD PLACED STUDENTS</h6>
+                  <h2 className="text-right">
+                    <i className="fa fa-cart-plus f-left"></i>
+                    <span>{count.placedCount}</span>
+                  </h2>
+                </div>
+              </div>
+            </Col>
+          ) : null}
           <Col>
             <div
               className="dashboardCard bg-c-yellow order-card"
@@ -54,48 +77,52 @@ const Dashboard = () => {
               </div>
             </div>
           </Col>
+          {isAdmin() && (
+            <Col>
+              <div
+                className="dashboardCard bg-c-green order-card"
+                onClick={() => navigate("/showFaculties")}
+              >
+                <div className="card-block">
+                  <h6 className="m-b-20">FACULTY</h6>
+                  <h2 className="text-right">
+                    <i className="fa fa-cart-plus f-left"></i>
+                    <span>{count.facultyCount}</span>
+                  </h2>
+                </div>
+              </div>
+            </Col>
+          )}
+
           <Col>
-            <div className="dashboardCard bg-c-green order-card" onClick={()=>navigate('/showFaculties')}>
+            <div
+              className="dashboardCard bg-c-pink order-card"
+              onClick={() => navigate("/showPipelinedCompanies")}
+            >
               <div className="card-block">
-                <h6 className="m-b-20">FACULTY</h6>
+                <h6 className="m-b-20">PIPELINED COMPANIES</h6>
                 <h2 className="text-right">
                   <i className="fa fa-cart-plus f-left"></i>
-                  <span>{count.facultyCount}</span>
+                  <span>{count.piplinedCompaniesCount}</span>
                 </h2>
               </div>
             </div>
           </Col>
           <Col>
-            <div className="dashboardCard bg-c-pink order-card" onClick={()=>navigate('/showCompanies')}>
+            <div
+              className="dashboardCard bg-c-yellow order-card"
+              onClick={() => navigate("/showCompletedCompanies")}
+            >
               <div className="card-block">
-                <h6 className="m-b-20">COMPANIES</h6>
+                <h6 className="m-b-20">COMPLETED COMPANIES</h6>
                 <h2 className="text-right">
                   <i className="fa fa-cart-plus f-left"></i>
-                  <span>{count.companiesCount}</span>
+                  <span>{count.completedCompaniesCount}</span>
                 </h2>
               </div>
             </div>
           </Col>
         </Row>
-        {/* <Row>
-            <Col>
-            
-            <Plot
-            data={[
-              {
-                x: ["Students", "Faculty", "Admin"],
-                y: [900, 300, 1],
-                type: "bar",
-                marker: { color: "lightblue" },
-                width : 0.4
-              },
-            ]}
-            layout={{ width: '100%', height: 400, title: "USER'S",displayLogo : false , showLegend : false}}
-           
-          />
-            </Col>
-          
-        </Row> */}
       </Container>
     </>
   );

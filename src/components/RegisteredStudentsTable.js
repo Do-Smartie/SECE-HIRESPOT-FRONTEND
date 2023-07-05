@@ -34,6 +34,7 @@ const RegisteredStudentsTable = (props)=>{
         mobileNumber  : '',
         mailID : '',
         address : '',
+        placed :'',
         onePageResume : '',
         threePageResume : ''
       });
@@ -70,7 +71,8 @@ const RegisteredStudentsTable = (props)=>{
       row.mailID.toLowerCase().indexOf(schema.mailID) === 0 &&
       row.address.toLowerCase().indexOf(schema.address) === 0 &&
       row.onePageResume.toLowerCase().indexOf(schema.onePageResume) === 0 &&
-      row.threePageResume.toLowerCase().indexOf(schema.threePageResume) === 0 
+      row.threePageResume.toLowerCase().indexOf(schema.threePageResume) === 0 &&
+      row.placed.toLowerCase().indexOf(schema.placed)===0
     );
   })
 
@@ -105,6 +107,7 @@ const RegisteredStudentsTable = (props)=>{
               <TableCell><strong>Email</strong></TableCell>
               <TableCell><strong>Gender</strong></TableCell>
               <TableCell><strong>Deparment</strong></TableCell>
+              <TableCell><strong>Placed</strong></TableCell>
               <TableCell><strong>DOB</strong></TableCell>
               <TableCell><strong>10TH %</strong></TableCell>
               <TableCell><strong>12TH %</strong></TableCell>
@@ -165,6 +168,14 @@ const RegisteredStudentsTable = (props)=>{
                       placeholder="Department"
                       onChange={(event) => {
                         filter("department", event.target.value);
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <input
+                      placeholder="NotPlaced or Company name"
+                      onChange={(event) => {
+                        filter("placed", event.target.value);
                       }}
                     />
                   </TableCell>

@@ -1,4 +1,4 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import "../App.css";
 import { useState } from "react";
 import { login } from "../services/postRequest";
@@ -6,7 +6,7 @@ import {   getCookie, isAuthenticated } from "../services/Auth";
 import MainNavbar from "../components/MainNavbar";
 
 const Login = () => {
-  const [userData, setUserData] = useState({ username: "", password: "" });
+  const [userData, setUserData] = useState({ username: "", password: "" ,useType:""});
 
   const [loading, setLoading] = useState(false);
 
@@ -40,7 +40,7 @@ const Login = () => {
 	}).finally(()=>{
 		setLoading(false);
 	})
-    setUserData({ username: "", password: "" });
+    setUserData({ username: "", password: "",userType:"" });
   };
   
   if(isAuthenticated()){
@@ -54,7 +54,7 @@ const Login = () => {
       <div className="row main-content bg-success text-center">
         <div className="col-md-4 text-center company__info">
           <span className="company__logo">
-            <img src="/loginLogo.jpg" style={{ borderRadius: "10px" }}></img>
+            <img src="/loginLogo.jpg" alt="logo" style={{ borderRadius: "10px" }}></img>
           </span>
           {/* <h4 className="company_title">Your Company Logo</h4> */}
         </div>
@@ -91,6 +91,16 @@ const Login = () => {
                     placeholder="Password"
                     required
                   />
+                </div>
+                <div className="row">
+                    <select name="userType"  className="form__input" id="userType"  onChange={OnHandleChange}
+                       required>
+                      <option label="User Type" value=""></option>
+                      <option value="Student">Student</option>
+                      <option value="Faculty">Faculty</option>
+                      <option value="FacultyPC">Faculty Placement Coordinator</option>
+                      <option value="Admin">Admin</option>
+                    </select>
                 </div>
 				<div className="row">
 					<div className="col" style={{textAlign:"center"}}>

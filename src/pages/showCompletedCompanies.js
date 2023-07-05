@@ -7,9 +7,9 @@ import Form from "react-bootstrap/esm/Form";
 import Card from "react-bootstrap/esm/Card";
 import Button from "react-bootstrap/esm/Button";
 import { useState } from "react";
-import { getBatchwiseCompanies } from "../services/postRequest";
+import { getBatchwiseCompletedCompanies } from "../services/postRequest";
 import CompaniesTable from "../components/CompaniesTable";
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from "react-bootstrap/Spinner";
 
 const DummyCompanies = [
   {
@@ -94,7 +94,7 @@ const DummyCompanies = [
   },
 ];
 
-const ShowCompanies = () => {
+const ShowCompletedCompanies = () => {
   //stste for companies
   const [companies, setCompanines] = useState([]);
 
@@ -113,11 +113,14 @@ const ShowCompanies = () => {
 
     console.log(neededBatch);
     setSpinner(true);
-    getBatchwiseCompanies(neededBatch)
+    getBatchwiseCompletedCompanies(neededBatch)
       .then((res) => {
-        if (res.Success) {
-          setCompanines(res.data);
+        if (res.data.Success) {
+          setCompanines(res.data.Data);
+          console.log(companies, res.data.Data);
           setSpinner(false);
+        } else {
+          window.alert(res.data.Message);
         }
       })
       .catch((err) => {
@@ -144,14 +147,24 @@ const ShowCompanies = () => {
                   </Form.Label>
                   <Col sm={5}>
                     <Form.Control
-                      type="text"
-                      id="batch"
-                      value={neededBatch.batch}
+                      as="select"
+                      aria-label="Default select example"
                       name="batch"
                       onChange={OnHandleChange}
-                      placeholder="Filter with Batch(2020-2024)"
-                      required
-                    />
+                    >
+                      <option>Batch of the students</option>
+                      <option value="2024">2024</option>
+                      <option value="2025">2025</option>
+                      <option value="2026">2026</option>
+                      <option value="2027">2027</option>
+                      <option value="2028">2028</option>
+                      <option value="2029">2029</option>
+                      <option value="2030">2030</option>
+                      <option value="2031">2031</option>
+                      <option value="2032">2032</option>
+                      <option value="2033">2033</option>
+                      <option value="2034">2034</option>
+                    </Form.Control>
                   </Col>
                   <Col sm={5}>
                     <Button
@@ -169,8 +182,10 @@ const ShowCompanies = () => {
         </Row>
         <Row style={{ marginTop: "3%" }}>
           <Card>
-            <h5 style={{marginLeft:"3%"}}>Companies</h5>
-            <hr style={{ border: "3px solid #004E9B", borderRadius: "5px" }}></hr>
+            <h5 style={{ marginLeft: "3%" }}>Companies</h5>
+            <hr
+              style={{ border: "3px solid #004E9B", borderRadius: "5px" }}
+            ></hr>
             {spinner ? (
               <Spinner
                 animation="border"
@@ -180,7 +195,7 @@ const ShowCompanies = () => {
                 <span className="visually-hidden">Loading...</span>
               </Spinner>
             ) : (
-              <CompaniesTable TableData={DummyCompanies} />
+              <CompaniesTable TableData={companies} />
             )}
           </Card>
         </Row>
@@ -189,4 +204,4 @@ const ShowCompanies = () => {
   );
 };
 
-export default ShowCompanies;
+export default ShowCompletedCompanies;

@@ -23,7 +23,7 @@ const Footer = () => {
               </span>
             </Col>
             <Col xs={6} md={4}  className="footerQouteCol">
-              <h1 style={{fontFamily:"fantasy",fontStyle:"inherit"}}>''BEGIN YOUR SUCCESS STORY AT<br></br>SRI ESHWAR''</h1>
+              <h1 className="footh1" style={{fontFamily:"fantasy",fontStyle:"inherit"}}>''BEGIN YOUR SUCCESS STORY AT<br></br>SRI ESHWAR''</h1>
             </Col>
           </div>
         </div>

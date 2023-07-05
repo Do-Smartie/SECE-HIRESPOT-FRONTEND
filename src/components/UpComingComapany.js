@@ -18,7 +18,7 @@ const UpComingCompany = (props) => {
  const downloadJobDescription = ()=>{
      
       getJD(companyName,role,batch).then((res)=>{
-        console.log(res);
+        window.location.href=process.env.REACT_APP_BACKEND_API+"/sece/download/"+res.data;
       }).catch((err)=>{
           console.log(err);
       })
@@ -46,7 +46,7 @@ const UpComingCompany = (props) => {
               <Link variant="outline-info" onClick={downloadJobDescription}>Job Description</Link>
             </Col>
             <Col xs={6} style={{ textAlign: "right" }}>
-              <Link to={"/companyRegister"} state={{_id:_id,companyName:companyName,role:role,Package:Package}}><Button className="buttonBlink" size="sm" >Apply Now</Button></Link>
+              <Link to={"/companyRegister"} state={{_id:_id,companyName:companyName,role:role,Package:Package,batch:batch}}><Button className="buttonBlink" size="sm" >Apply Now</Button></Link>
             </Col>
           </>
       );

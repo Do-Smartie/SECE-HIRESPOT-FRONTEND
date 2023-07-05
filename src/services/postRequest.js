@@ -96,11 +96,18 @@ export const getUserCompanyDetails = async(studentData)=>{
     return await axios.post(process.env.REACT_APP_BACKEND_API+"/sece/admin/showuserdetails",studentData,{withCredentials:true});
 }
 
-//post request for getting batch wise companies
+//post request for getting batch wise Piplinedcompanies
 
-export const getBatchwiseCompanies = async(companyBatch)=>{
+export const getBatchwisePipelinedCompanies = async(companyBatch)=>{
 
-    return await axios.post(process.env.REACT_APP_BACKEND_API+"/sece/admin/showcompanies",companyBatch,{withCredentials:true});
+    return await axios.post(process.env.REACT_APP_BACKEND_API+"/sece/admin/showpiplinedcompanies",companyBatch,{withCredentials:true});
+}
+
+//post request for getting batch wise Completedcompanies
+
+export const getBatchwiseCompletedCompanies = async(companyBatch)=>{
+
+    return await axios.post(process.env.REACT_APP_BACKEND_API+"/sece/admin/showcompletedcompanies",companyBatch,{withCredentials:true});
 }
 
 //post request for  getting registered students of particular company
@@ -110,10 +117,37 @@ export const getRegisteredStudents = async(data)=>{
     return await axios.post(process.env.REACT_APP_BACKEND_API+"/sece/admin/showregisteredstudents",data,{withCredentials:true});
 }
 
+//post request for  getting placed students of particular company
+
+export const getPlacedStudents = async(data)=>{
+
+    return await axios.post(process.env.REACT_APP_BACKEND_API+"/sece/admin/showplacedstudents",data,{withCredentials:true})
+}
+
+//getting enable permmision for cgpa update
+
+export const getEnableCGPA = async(data)=>{
+
+    return await axios.get(process.env.REACT_APP_BACKEND_API+"/sece/facultypc/profile/enablecgpaupdate",data,{withCredentials:true})
+}
+
+//getting enable permmision for cgpa update
+
+export const getDisableCGPA = async(data)=>{
+    return await axios.get(process.env.REACT_APP_BACKEND_API+"/sece/facultypc/profile/disablecgpaupdate",data,{withCredentials:true})
+}
+
 //change password
 
 export const changePassword = async(data)=>{
 
     return await axios.post(process.env.REACT_APP_BACKEND_API+'/sece/user/forgotpassword',data);
+}
+
+//post route for addingPlaced student details
+
+export const addPlacedDetails = async(data)=>{
+
+    return await axios.post(process.env.REACT_APP_BACKEND_API+'/sece/pc/addplaceddetails',data);
 }
 
