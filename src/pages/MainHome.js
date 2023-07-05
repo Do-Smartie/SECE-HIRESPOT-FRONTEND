@@ -37,46 +37,7 @@ const MainHome = () => {
   const [pipelinedCount, setPipelinedCount] = useState(0);
   const [completedCount, setCompletedCount] = useState(0);
 
-  const [completedCompaniesDetail, setCompletedCompaniesDetail] = useState([
-    {
-      companyName: "Google",
-      placed: "50",
-    },
-    {
-      companyName: "Duccen",
-      placed: "50",
-    },
-    {
-      companyName: "Nference",
-      placed: "2",
-    },
-    {
-      companyName: "Saptanglabs",
-      placed: "8",
-    },
-    {
-      companyName: "Amazon",
-      placed: "1",
-    }, {
-      companyName: "ShopUp",
-      placed: "1",
-    }, {
-      companyName: "ShopUp",
-      placed: "1",
-    }, {
-      companyName: "ShopUp",
-      placed: "1",
-    }, {
-      companyName: "ShopUp",
-      placed: "1",
-    }, {
-      companyName: "ShopUp",
-      placed: "1",
-    }, {
-      companyName: "ShopUp",
-      placed: "1",
-    }
-  ]);
+  const [completedCompaniesDetail, setCompletedCompaniesDetail] = useState([]);
   useEffect(() => {
     getCounterData().then((res) => {
       if (res.data.Success) {
