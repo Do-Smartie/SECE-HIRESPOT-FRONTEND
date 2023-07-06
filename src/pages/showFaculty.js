@@ -86,13 +86,14 @@ const Faculty = () => {
     schema[attr] = value.toLowerCase();
     setSchema({ ...schema });
   }
+
   let table;
 
   if(!boolFilter)
-  table=dummyFaculties;
+  table=faculty;
 
   else
-  table = dummyFaculties.filter((row) => {
+  table = faculty.filter((row) => {
     return (
       row.username.toLowerCase().indexOf(schema.username) == 0 &&
       row.email.toLowerCase().indexOf(schema.email) == 0 &&
@@ -185,9 +186,9 @@ const Faculty = () => {
                       </TableCell>
                       <TableCell>
                         <input
-                          placeholder="Register No"
+                          placeholder="Roll No"
                           onChange={(event) => {
-                            filter("regNo", event.target.value);
+                            filter("rollNo", event.target.value);
                           }}
                         />
                       </TableCell>
@@ -201,7 +202,7 @@ const Faculty = () => {
                       </TableCell>
                     </TableRow>
                   )}
-                  {faculty.map((row) => {
+                  {table.map((row) => {
                     return (
                       <TableRow
                         className="tableRow"

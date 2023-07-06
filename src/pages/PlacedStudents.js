@@ -159,7 +159,7 @@ const PlacedStudents = () => {
               </h7>
               <br></br>
               <h7 style={{ textTransform: "uppercase" }} className="text2">
-                <strong>Registered count : {placedStudents.length}</strong>
+                <strong>Placed count : {placedStudents.length}</strong>
               </h7>
               <br></br>
             </div>

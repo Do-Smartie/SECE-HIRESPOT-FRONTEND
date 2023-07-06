@@ -6,7 +6,7 @@ import {   getCookie, isAuthenticated } from "../services/Auth";
 import MainNavbar from "../components/MainNavbar";
 
 const Login = () => {
-  const [userData, setUserData] = useState({ username: "", password: "" ,useType:""});
+  const [userData, setUserData] = useState({ username: "", password: "" ,userType:""});
 
   const [loading, setLoading] = useState(false);
 

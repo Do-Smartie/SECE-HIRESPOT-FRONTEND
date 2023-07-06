@@ -233,7 +233,7 @@ const Register = () => {
                       value={registerData.fullName}
                       id="fullName"
                       className="form__input"
-                      placeholder="Enter the exact name for company Registration"
+                      placeholder="Enter Your Name in Capital"
                       required
                     />
                   </div>

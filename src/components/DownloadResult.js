@@ -41,8 +41,14 @@ const DownloadResult = (props) => {
         setSpinner(true);
         downloadDriveResult(resultDetail).then((res)=>{
             console.log(res);
-            window.location.href = process.env.REACT_APP_BACKEND_API+"/sece/results/"+res.data;
-            setSpinner(false);
+            if(res.data.Success===false){
+              window.alert(res.data.Message);
+              return;
+            }
+            else{
+              window.location.href = process.env.REACT_APP_BACKEND_API+"/sece/results/"+res.data;
+              setSpinner(false);
+            }
         }).catch((err)=>{
             console.log(err);
             window.alert("Error occurred in Downloading - Try Again");

@@ -43,12 +43,12 @@ const CompaniesTable = (props) => {
   else
   table = props.TableData.filter((row) => {
     return (
-      row.dateOfDrive.toLowerCase().indexOf(schema.dateOfDrive) === 0 &&
-      row.Package.toLowerCase().indexOf(schema.Package) === 0 &&
-      row.role.toLowerCase().indexOf(schema.role) === 0 &&
-      row.companyName.toLowerCase().indexOf(schema.companyName) === 0 &&
-      row.batch.toLowerCase().indexOf(schema.batch) === 0 &&
-      row.category.toLowerCase().indexOf(schema.category) === 0
+      toDate(row.dateOfDrive).toLowerCase().indexOf(schema.dateOfDrive) == 0 &&
+      row.Package.toLowerCase().indexOf(schema.Package) == 0 &&
+      row.role.toLowerCase().indexOf(schema.role) == 0 &&
+      row.companyName.toLowerCase().indexOf(schema.companyName) == 0 &&
+      row.batch.toLowerCase().indexOf(schema.batch) ==0 &&
+      row.category.toLowerCase().indexOf(schema.category) == 0
     );
   })
 
@@ -147,7 +147,7 @@ const CompaniesTable = (props) => {
               {table.map((row) => {
                 return (
                   <TableRow className="tableRow" onClick={() => gotoCompany(row)}>
-                    <TableCell>{row.dateOfDrive}</TableCell>
+                    <TableCell>{toDate(row.dateOfDrive)}</TableCell>
                     <TableCell>{row.companyName}</TableCell>
                     <TableCell>{row.Package}</TableCell>
                     <TableCell>{row.role}</TableCell>
@@ -163,5 +163,11 @@ const CompaniesTable = (props) => {
     </Container>
   );
 };
+
+function toDate(dates){
+
+  let date = new Date(dates);
+  return date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
+}
 
 export default CompaniesTable;

@@ -43,6 +43,8 @@ export const getCompletedCompaniesDetailsForHome = async()=>{
 
 export const getUserTypeOnLogin = async()=>{
 
+    console.log('Hello')
+
     return await axios.get(process.env.REACT_APP_BACKEND_API+"/sece/user/type",{withCredentials:true});
 }
 

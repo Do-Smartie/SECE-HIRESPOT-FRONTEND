@@ -12,7 +12,7 @@ import { registerToCompany } from "../services/postRequest";
 const CompanyRegister = ()=>{
      
     const location = useLocation();
-    const {_id,companyName,role,Package,batch} = location.state;
+    const {_id,companyName,role,Package,batch,dateOfDrive} = location.state;
     // console.log(id,companyName);
 
     const navigate = useNavigate();
@@ -27,6 +27,7 @@ const CompanyRegister = ()=>{
         companyName:companyName,
         Package : Package,
         batch:batch,
+        dateOfDrive:dateOfDrive,
         onePageResume : '',
         threePageResume : ''
     });
@@ -72,6 +73,7 @@ const CompanyRegister = ()=>{
                 companyName:companyName,
                 Package : Package,
                 batch:batch,
+                dateOfDrive:dateOfDrive,
                 onePageResume : '',
                 threePageResume : ''
             }

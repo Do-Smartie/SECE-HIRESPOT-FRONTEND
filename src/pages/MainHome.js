@@ -56,73 +56,108 @@ const MainHome = () => {
         setCompletedCompaniesDetail(res.data.Data);
       }
     });
-  }, []);
+  }, [])
 
-  useEffect(() => {
-    let placed = setInterval(placedCounter);
+  useEffect(()=>{
+  
+    setTimeout(()=>{
+      if(placedCount<counts.placed)
+      setPlacedCount(placedCount+1)
+    },1000)
+  },[placedCount,counts])
 
-    let i = 0;
-    function placedCounter() {
-      if (counts.placed > 100) {
-        i = i + 5;
-        setPlacedCount(i);
-      } else {
-        i = i + 2;
-        setPlacedCount(i);
-      }
-      if (i === counts.placed) {
-        clearInterval(placed);
-      }
-    }
+  useEffect(()=>{
+    setTimeout(()=>{
+      if(nonPlacedCount<counts.nonPlaced)
+      setNonPlacedCount(nonPlacedCount+1)
+    },1000)
+  },[nonPlacedCount,counts])
 
-    let nonPlaced = setInterval(nonPlacedCounter);
-    let j = 0;
-    function nonPlacedCounter() {
-      if (counts.nonPlaced > 100) {
-        j = j + 5;
-        setNonPlacedCount(j);
-      } else {
-        j = j + 2;
-        setNonPlacedCount(j);
-      }
+  useEffect(()=>{
+    setTimeout(()=>{
+      if(pipelinedCount<counts.pipelinedCompanies)
+      setPipelinedCount(pipelinedCount+1)
+    },1000)
+  },[pipelinedCount,counts])
 
-      if (j === counts.nonPlaced) {
-        clearInterval(nonPlaced);
-      }
-    }
+  useEffect(()=>{
+    setTimeout(()=>{
+      if(completedCount<counts.completedCompanies)
+      setCompletedCount(completedCount+1)
+    },1000)
+  },[completedCount,counts])
 
-    let piplined = setInterval(piplinedCounter);
-    let k = 0;
-    function piplinedCounter() {
-      if (counts.pipelinedCompanies > 100) {
-        k = k + 5;
-        setPipelinedCount(k);
-      } else {
-        k = k + 2;
-        setPipelinedCount(k);
-      }
 
-      if (k === counts.pipelinedCompanies) {
-        clearInterval(piplined);
-      }
-    }
+  
 
-    let completed = setInterval(completedCounter);
-    let l = 0;
-    function completedCounter() {
-      if (counts.completedCompanies > 100) {
-        l = l + 5;
-        setCompletedCount(l);
-      } else {
-        l = l + 2;
-        setCompletedCount(l);
-      }
 
-      if (l === counts.completedCompanies) {
-        clearInterval(completed);
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   console.log(typeof(counts.placed));
+  //   let placed = setInterval(placedCounter);
+
+  //   let i = 0;
+
+  //   function placedCounter() {
+  //     if (counts.placed > 100) {
+  //       i = i + 5;
+  //       setPlacedCount(i);
+  //     } else {
+  //       i = i + 2;
+  //       setPlacedCount(i);
+  //     }
+  //     if (i >= counts.placed) {
+  //       clearInterval(placed);
+  //     }
+  //   }
+
+  //   let nonPlaced = setInterval(nonPlacedCounter);
+  //   let j = 0;
+  //   function nonPlacedCounter() {
+  //     if (counts.nonPlaced > 100) {
+  //       j = j + 5;
+  //       setNonPlacedCount(j);
+  //     } else {
+  //       j = j + 2;
+  //       setNonPlacedCount(j);
+  //     }
+
+  //     if (j >= counts.nonPlaced) {
+  //       clearInterval(nonPlaced);
+  //     }
+  //   }
+
+  //   let piplined = setInterval(piplinedCounter);
+  //   let k = 0;
+  //   function piplinedCounter() {
+  //     if (counts.pipelinedCompanies > 100) {
+  //       k = k + 5;
+  //       setPipelinedCount(k);
+  //     } else {
+  //       k = k + 2;
+  //       setPipelinedCount(k);
+  //     }
+
+  //     if (k >= counts.pipelinedCompanies) {
+  //       clearInterval(piplined);
+  //     }
+  //   }
+
+  //   let completed = setInterval(completedCounter);
+  //   let l = 0;
+  //   function completedCounter() {
+  //     if (counts.completedCompanies > 100) {
+  //       l = l + 5;
+  //       setCompletedCount(l);
+  //     } else {
+  //       l = l + 2;
+  //       setCompletedCount(l);
+  //     }
+
+  //     if (l >= counts.completedCompanies) {
+  //       clearInterval(completed);
+  //     }
+  //   }
+  // }, [placedCount,nonPlacedCount,completedCount,pipelinedCount]);
   return (
     <>
       <MainNavbar />
@@ -321,7 +356,7 @@ const MainHome = () => {
                       {" "}
                       <span className="fa fa-smile-o"></span>
                       <p className="number">{pipelinedCount}</p>
-                      <h4>Piplined Companies</h4>{" "}
+                      <h4>Pipelined Companies</h4>{" "}
                     </div>
                   </div>
                 </div>
@@ -356,7 +391,7 @@ const MainHome = () => {
                      <div className="card-block">
                        <h7 className="m-b-20"><strong>{company.companyName}</strong></h7>
                        <h6 className="text-right">
-                         <span>{company.placed} Placed</span>
+                         <span>{company.PlacedCount} Placed</span>
                        </h6>
                      </div>
                    </div>
@@ -375,7 +410,7 @@ const MainHome = () => {
               </div>
               <div style={{ marginTop: "4%" }} className="imageDiv">
                 <img
-                  src="/group.png"
+                  src="/alumniCard.jpg" 
                   style={{ border: "4px solid #004E9B", borderRadius: "8px" }}
                   alt="groupPic"
                   className="mobImage"

@@ -24,6 +24,7 @@ const StudentsTable = (props) => {
     rollNo: "",
     department: "",
     username: "",
+    Placed:''
   });
 
 
@@ -48,7 +49,8 @@ const StudentsTable = (props) => {
       row.regNo.toLowerCase().indexOf(schema.regNo) == 0 &&
       row.rollNo.toLowerCase().indexOf(schema.rollNo) == 0 &&
       row.batch.toLowerCase().indexOf(schema.batch) == 0 &&
-      row.department.toLowerCase().indexOf(schema.department) == 0
+      row.department.toLowerCase().indexOf(schema.department) == 0 &&
+      row.Placed.toLowerCase().indexOf(schema.Placed)==0
     );
   })
 
@@ -90,6 +92,7 @@ const StudentsTable = (props) => {
               <TableCell><strong>Roll No</strong></TableCell>
               <TableCell><strong>Batch</strong></TableCell>
               <TableCell><strong>Deparment</strong></TableCell>
+              <TableCell><strong>Placed Status</strong></TableCell>
             </TableHead>
             <TableBody>
               {boolFilter && (
@@ -142,6 +145,14 @@ const StudentsTable = (props) => {
                       }}
                     />
                   </TableCell>
+                  <TableCell>
+                    <input
+                      placeholder="Placed or Not"
+                      onChange={(event) => {
+                        filter("Placed", event.target.value);
+                      }}
+                    />
+                  </TableCell>
                 </TableRow>
               )}
               {table.map((row) => {
@@ -153,6 +164,7 @@ const StudentsTable = (props) => {
                     <TableCell>{row.rollNo}</TableCell>
                     <TableCell>{row.batch}</TableCell>
                     <TableCell>{row.department}</TableCell>
+                    <TableCell>{row.Placed}</TableCell>
                   </TableRow>
                 );
               })}

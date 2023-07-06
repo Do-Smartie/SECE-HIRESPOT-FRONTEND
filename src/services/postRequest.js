@@ -128,13 +128,13 @@ export const getPlacedStudents = async(data)=>{
 
 export const getEnableCGPA = async(data)=>{
 
-    return await axios.get(process.env.REACT_APP_BACKEND_API+"/sece/facultypc/profile/enablecgpaupdate",data,{withCredentials:true})
+    return await axios.post(process.env.REACT_APP_BACKEND_API+"/sece/facultypc/profile/enablecgpaupdate",data,{withCredentials:true})
 }
 
 //getting enable permmision for cgpa update
 
 export const getDisableCGPA = async(data)=>{
-    return await axios.get(process.env.REACT_APP_BACKEND_API+"/sece/facultypc/profile/disablecgpaupdate",data,{withCredentials:true})
+    return await axios.post(process.env.REACT_APP_BACKEND_API+"/sece/facultypc/profile/disablecgpaupdate",data,{withCredentials:true})
 }
 
 //change password

@@ -182,6 +182,13 @@ const Profile = () => {
         setSpinner(false);
     })
   }
+
+  function toDate(dates){
+
+    let date = new Date(dates);
+    return date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
+  }
+
   return (
     <>
       <MainNavbar />
@@ -243,7 +250,7 @@ const Profile = () => {
                           <span class="display-26 text-secondary me-2 font-weight-600">
                             Date Of Birth:
                           </span>{" "}
-                          {user.dob}
+                          {toDate(user.dob)}
                         </li>
                         <li class="mb-2 mb-xl-3 display-28">
                           <span class="display-26 text-secondary me-2 font-weight-600">
@@ -333,13 +340,15 @@ const Profile = () => {
                       </ul>
                     </div>
                     <div className="row align-items-right" >
-                        <div className="col-lg-20 px-xl-70">
-                        <Button variant="primary" style={{marginLeft:"80%"}} onClick={()=>{
-                            setEdit(!edit)
-                        }} >EDIT</Button>
-                        </div>
+                       {sessionStorage.getItem('userType')==="Student" && (
+                          <div className="col-lg-20 px-xl-70">
+                          <Button variant="primary" style={{marginLeft:"80%"}} onClick={()=>{
+                              setEdit(!edit)
+                          }} >EDIT</Button>
+                          </div>
+                       )}
                         <br></br><br></br>
-                        {sessionStorage.getItem('userType')==='FacultyPC' || (
+                        {sessionStorage.getItem('userType')==='FacultyPC' && (
                           <div className="col-lg-20 px-xl-70">
                            {cgpaSpinner ? (
                              <button className="btn btn-primary" style={{marginLeft:"80%"}} type="button" disabled>
@@ -404,7 +413,7 @@ const Profile = () => {
                 />
               </Col>
             </Form.Group>
-            {user.edit && (
+            {user.edit==="true" && (
               <Form.Group as={Row} className="mb-3">
               <Form.Label column sm={2} style={{ textAlign: "center" }}>
                 <strong>CGPA</strong>

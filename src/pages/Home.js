@@ -117,7 +117,7 @@ const Home = (props) => {
 
     setSpinner(true);
     getCompanies()
-      .then((res) => {
+      .then(async(res) => {
 
         if(res.data.onGoingCompanies.length === 0){
            setNoOnGoingCompanies(true);
@@ -126,23 +126,25 @@ const Home = (props) => {
           setOnGoingCompanies(res.data.onGoingCompanies);
           setNoOnGoingCompanies(false);
           let val = res.data.onGoingCompanies.map((ele)=>{
+            console.log("element",ele.RegistrationCount);
              return ele.RegistrationCount;
           })
 
           setRegistrationCount(val);
+          console.log(registrationCount);
         }
         if(res.data.upComingCompanies.length === 0){
           setNoUpComingCompanies(true);
         }
         else{
-          setUpComingCompanies(res.data.upComingCompanies);
+        setUpComingCompanies(res.data.upComingCompanies);
           setNoUpComingCompanies(false);
         }  
         setSpinner(false);
       })
       .catch((err) => {
         console.log(err);
-        navigate('/404pageNotFound');
+        navigate('/home');
         window.alert(err.response.data.Message,'Reload Page');
 
       }).finally(()=>{
@@ -157,14 +159,17 @@ const Home = (props) => {
   setInterval(()=>{
 
      registrationCount.map((count)=>{
-      for(var i = 0;i<count;i++){
+      // console.log("count",count);
+      for(var i = 0;i<=count;i++){
+        // console.log(i);
          setBarVal(i);
+        //  console.log("barvalue",barVal);
       }
      })
       
   })
 
-  },[]);
+  },[registrationCount]);
 
 
 

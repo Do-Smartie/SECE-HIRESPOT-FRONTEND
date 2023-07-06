@@ -75,7 +75,7 @@ const CompanyCard = (props) => {
           <h4 style={{textAlign:"center",fontSize:"20",textTransform:"uppercase",fontFamily:"fantasy",color:"red"}}> {companyName}</h4>
         </div> */}
         <h7 style={{textTransform:"uppercase"}} className="text2"><strong>Role : {role}</strong></h7><br></br>
-        <h7 style={{textTransform:"uppercase"}} className="text2"><strong>Package : {Package}</strong></h7>
+        <h7 style={{textTransform:"uppercase"}} className="text2"><strong>Package : {Package}</strong></h7><br></br>
         <h7 style={{textTransform:"uppercase"}} className="text2"><strong>Batch : {batch}</strong></h7>
       </div>
       <div className="mt-2">
@@ -83,7 +83,7 @@ const CompanyCard = (props) => {
          
           <div className="mt-1">
             <span className="text1">
-              {barValue+1} Applied <span className="text2">of 600 capacity</span>
+              {barValue} Applied <span className="text2">of 600 capacity</span>
             </span>{" "}
           </div>
 

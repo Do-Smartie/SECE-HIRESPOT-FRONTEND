@@ -40,6 +40,9 @@ const AddPlacedStudents = () => {
             window.alert(res.data.Message);
             setSpinner(false);
         }
+        else{
+          window.alert(res.data.Message);
+        }
     }).catch((err)=>{
 
         window.alert(err.response.data.Message);
@@ -160,7 +163,7 @@ const AddPlacedStudents = () => {
                 <strong>Batch</strong>
               </Form.Label>
               <Col sm={5}>
-              <Form.Control as='select' aria-label="Default select example" name="batch" onChange={OnHandleChange}>
+              <Form.Control as='select' value={placedStudentDetails.batch} aria-label="Default select example" name="batch" onChange={OnHandleChange}>
                 <option>Batch of the student</option>
                 <option value="2024">2024</option>
                 <option value="2025">2025</option>
@@ -184,6 +187,7 @@ const AddPlacedStudents = () => {
               <Form.Control as='select'
                 aria-label="Default select example"
                 name="department"
+                value={placedStudentDetails.department}
                 onChange={OnHandleChange}
               >
                 <option>Department</option>
