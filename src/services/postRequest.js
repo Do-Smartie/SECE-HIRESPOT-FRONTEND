@@ -141,7 +141,27 @@ export const getDisableCGPA = async(data)=>{
 
 export const changePassword = async(data)=>{
 
-    return await axios.post(process.env.REACT_APP_BACKEND_API+'/sece/user/forgotpassword',data);
+    return await axios.post(process.env.REACT_APP_BACKEND_API+'/sece/user/forgotpassword',data,{withCredentials:true});
+}
+
+
+//post route for addPlacedStudents page for geting available companies
+
+export const getComapnyNamesForAddPlacedStudentsPage = async(batch)=>{
+
+    return await axios.post(process.env.REACT_APP_BACKEND_API+'/sece/admin/getcompanynamesforaddplacedpalcedstudentspage',batch,{withCredentials:true});
+}
+
+//post request for getting company deatails for addplaced students details
+export const getCompanydetailsForAddplacedStudentspage = async(data)=>{
+
+    return await axios.post(process.env.REACT_APP_BACKEND_API+'/sece/admin/getcompanydetailsforaddplacedstudentspage',data,{withCredentials:true});
+}
+
+//post request for getting students details for addPlacedStudents details
+export const getStudentDetailsForAddPlacedStudentPage = async(data)=>{
+
+    return await axios.post(process.env.REACT_APP_BACKEND_API+'/sece/admin/getstudentdetailsfotaddplacedstudentspage',data,{withCredentials:true});
 }
 
 //post route for addingPlaced student details

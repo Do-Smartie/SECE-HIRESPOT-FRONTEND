@@ -248,19 +248,19 @@ const Profile = () => {
                         </li>
                         <li class="mb-2 mb-xl-3 display-28">
                           <span class="display-26 text-secondary me-2 font-weight-600">
-                            Date Of Birth:
+                            Date of Birth:
                           </span>{" "}
                           {toDate(user.dob)}
                         </li>
                         <li class="mb-2 mb-xl-3 display-28">
                           <span class="display-26 text-secondary me-2 font-weight-600">
-                            Tenth Percent:
+                            SSLC Percent:
                           </span>{" "}
                           {user.tenthPercent}
                         </li>
                         <li class="mb-2 mb-xl-3 display-28">
                           <span class="display-26 text-secondary me-2 font-weight-600">
-                            Twelth Percent:
+                            HSC Percent:
                           </span>{" "}
                           {user.twelthPercent}
                         </li>
@@ -278,13 +278,13 @@ const Profile = () => {
                         </li>
                         <li class="mb-2 mb-xl-3 display-28">
                           <span class="display-26 text-secondary me-2 font-weight-600">
-                            No Of Arrears:
+                            No of Arrears:
                           </span>{" "}
                           {user.noOfArrears}
                         </li>
                         <li class="mb-2 mb-xl-3 display-28">
                           <span class="display-26 text-secondary me-2 font-weight-600">
-                            History Of Arrears:
+                            History of Arrears:
                           </span>{" "}
                           {user.historyOfArrears}
                         </li>
@@ -394,6 +394,7 @@ const Profile = () => {
                   name="username"
                   onChange={OnHandleChange}
                   placeholder="Enter the User name"
+                  pattern="[0-9]{2}[A-Z]{2}[0-9]{3}"
                   required
                 />
               </Col>
@@ -413,22 +414,144 @@ const Profile = () => {
                 />
               </Col>
             </Form.Group>
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm={2} style={{ textAlign: "center" }}>
+                <strong>Roll No</strong>
+              </Form.Label>
+              <Col sm={5}>
+                <Form.Control
+                  type="text"
+                  value={newUser.rollNo}
+                  name="rollNo"
+                  onChange={OnHandleChange}
+                  pattern={newUser.username}
+                  placeholder="Enter the your rollNo"
+                  required
+                />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm={2} style={{ textAlign: "center" }}>
+                <strong>Registration Number</strong>
+              </Form.Label>
+              <Col sm={5}>
+                <Form.Control
+                  type="text"
+                  value={newUser.regNo}
+                  name="regNo"
+                  onChange={OnHandleChange}
+                  pattern="[0-9]{12}"
+                  placeholder="Enter the your Registration No"
+                  required
+                />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm={2} style={{ textAlign: "center" }}>
+                <strong>Date of Birth </strong>
+              </Form.Label>
+              <Col sm={5}>
+                <Form.Control
+                  type="date"
+                  value={newUser.dob}
+                  name="dob"
+                  onChange={OnHandleChange}
+                  placeholder="Enter the your DOB"
+                  required
+                />
+              </Col>
+            </Form.Group>
             {user.edit==="true" && (
+              <>
+              <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm={2} style={{ textAlign: "center" }}>
+                <strong>SSLC Percent</strong>
+              </Form.Label>
+              <Col sm={5}>
+                <Form.Control
+                  type="number"
+                  value={newUser.tenthPercent}
+                  name="tenthPercent"
+                  onChange={OnHandleChange}
+                  step="any"
+                  min={35}
+                  max={100}
+                  placeholder="Enter the Your 10th percentage"
+                  required
+                />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm={2} style={{ textAlign: "center" }}>
+                <strong>HSC Percent</strong>
+              </Form.Label>
+              <Col sm={5}>
+                <Form.Control
+                  type="number"
+                  value={newUser.twelthPercent}
+                  name="twelthPercent"
+                  onChange={OnHandleChange}
+                  step="any"
+                  min={35}
+                  max={100}
+                  placeholder="Enter the Your 12th percentage"
+                  required
+                />
+              </Col>
+            </Form.Group>
               <Form.Group as={Row} className="mb-3">
               <Form.Label column sm={2} style={{ textAlign: "center" }}>
                 <strong>CGPA</strong>
               </Form.Label>
               <Col sm={5}>
                 <Form.Control
-                  type="text"
+                  type="number"
                   value={newUser.cgpa}
                   name="cgpa"
                   onChange={OnHandleChange}
+                  step="any"
+                  min={5}
+                  max={10}
                   placeholder="Enter the new CGPA"
                   required
                 />
               </Col>
             </Form.Group>
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm={2} style={{ textAlign: "center" }}>
+                <strong>History of Arrears</strong>
+              </Form.Label>
+              <Col sm={5}>
+                <Form.Control
+                  type="number"
+                  value={newUser.historyOfArrears}
+                  name="historyOfArrears"
+                  onChange={OnHandleChange}
+                  placeholder="Enter the updtaed history Of Arrears"
+                  min={0}
+                  max={20}
+                  required
+                />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm={2} style={{ textAlign: "center" }}>
+                <strong>Number of Arrears</strong>
+              </Form.Label>
+              <Col sm={5}>
+                <Form.Control
+                  type="number"
+                  value={newUser.noOfArrears}
+                  name="noOfArrears"
+                  onChange={OnHandleChange}
+                  placeholder="Enter the updtaed Number Of Arrears"
+                  min={0}
+                  max={newUser.historyOfArrears}
+                  required
+                />
+              </Col>
+            </Form.Group>
+            </>
             )}
             <Form.Group as={Row} className="mb-3">
               <Form.Label column sm={2} style={{ textAlign: "center" }}>

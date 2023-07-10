@@ -54,25 +54,26 @@ function App() {
           <Route path="/singleCompanyresult" element={<SingleCompanyResults />} />
           <Route path="/profile" element={<Profile />} exact />
         </Route>
-        <Route element={<ProtectedFacultyPCRoute />}>
+        {/* <Route element={<ProtectedFacultyPCRoute />}>
           <Route path="/addPlacedStudents" element={<AddPlacedStudents />}/>
-        </Route>
+        </Route> */}
         <Route element={<ProtectedAdminRoutes />}>
           <Route path="/addCompanies" element={<AddCompanies />} exact/>
+          <Route path="/addPlacedStudents" element={<AddPlacedStudents />} exact/>
           <Route
             path="/editCompany"
             element={<EditCompany />} exact
           />
-          <Route path="/addDriveResults" element={<AddDriveResults />} />
-          <Route path="/dashboard" element={<Dashboard />}/>
-          <Route path="/showStudents" element={<ShowStudents />  }/>
-          <Route path="/userAttendedCompanies" element={<UserAttendedCompanies />} />
-          <Route path="/showFaculties" element={<Faculty />}/>
-          <Route path="/showFaultiesProfiles" element={<FacultiesProfiles />}/>
-          <Route path="/showPipelinedCompanies" element={<ShowPipelinedCompanies />} />
-          <Route path="/showCompletedCompanies" element={<ShowCompletedCompanies />}/>
-          <Route path="/registeredStudents" element={<RegisteredStudents />}/>
-          <Route path="/placedStudents" element={<PlacedStudents />}/>
+          <Route path="/addDriveResults" element={<AddDriveResults />} exact/>
+          <Route path="/dashboard" element={<Dashboard />} exact/>
+          <Route path="/showStudents" element={<ShowStudents />  } exact/>
+          <Route path="/userAttendedCompanies" element={<UserAttendedCompanies />} exact/>
+          <Route path="/showFaculties" element={<Faculty />} exact/>
+          <Route path="/showFaultiesProfiles" element={<FacultiesProfiles />} exact/>
+          <Route path="/showPipelinedCompanies" element={<ShowPipelinedCompanies />} exact/>
+          <Route path="/showCompletedCompanies" element={<ShowCompletedCompanies />} exact/>
+          <Route path="/registeredStudents" element={<RegisteredStudents />} exact/>
+          <Route path="/placedStudents" element={<PlacedStudents />} exact/>
         </Route>
       </Routes>
       <Footer />

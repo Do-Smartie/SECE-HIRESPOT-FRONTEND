@@ -46,9 +46,9 @@ const Dashboard = () => {
     <>
       <MainNavbar />
       <Container style={{ marginTop: "4%" }}>
-        <Row>
-          {sessionStorage.getItem("userType") === "FacultyPC" ? (
-            <Col>
+        <Row >
+          {isAdmin() ? (
+            <Col xs={8} md={3}>
               <div
                 className="dashboardCard bg-c-green order-card"
                 onClick={() => navigate("/addPlacedStudents")}
@@ -63,7 +63,7 @@ const Dashboard = () => {
               </div>
             </Col>
           ) : null}
-          <Col>
+          <Col xs={8} md={3}>
             <div
               className="dashboardCard bg-c-yellow order-card"
               onClick={() => navigate("/showStudents")}
@@ -78,7 +78,7 @@ const Dashboard = () => {
             </div>
           </Col>
           {isAdmin() && (
-            <Col>
+            <Col xs={8} md={3}>
               <div
                 className="dashboardCard bg-c-green order-card"
                 onClick={() => navigate("/showFaculties")}
@@ -94,7 +94,7 @@ const Dashboard = () => {
             </Col>
           )}
 
-          <Col>
+          <Col xs={8} md={3}>
             <div
               className="dashboardCard bg-c-pink order-card"
               onClick={() => navigate("/showPipelinedCompanies")}
@@ -108,7 +108,7 @@ const Dashboard = () => {
               </div>
             </div>
           </Col>
-          <Col>
+          <Col xs={8} md={3}>
             <div
               className="dashboardCard bg-c-yellow order-card"
               onClick={() => navigate("/showCompletedCompanies")}

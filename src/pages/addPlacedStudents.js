@@ -6,7 +6,7 @@ import Row from "react-bootstrap/esm/Row";
 import Card from "react-bootstrap/esm/Card";
 import Container from "react-bootstrap/esm/Container";
 import MainNavbar from "../components/MainNavbar";
-import { addPlacedDetails } from "../services/postRequest";
+import { addPlacedDetails, getComapnyNamesForAddPlacedStudentsPage, getCompanydetailsForAddplacedStudentspage, getStudentDetailsForAddPlacedStudentPage } from "../services/postRequest";
 
 const AddPlacedStudents = () => {
   const [placedStudentDetails, setPlacedStudentsDetails] = useState({
@@ -19,7 +19,72 @@ const AddPlacedStudents = () => {
     batch: "",
     role:''
   });
+ 
+  const[companyNames,setCompanyNames] = useState(['Google','Nbase2','kanini','DevRev']);
+  const[roles,setRoles] = useState(['Fullstack','FrontEnd','Backend']);
+  const[packages,setPackages] = useState([700000,6000000,900000]);
+   
+  //for getting companyName
+  
+  const getComapanyNames = (event)=>{
+      
+      const batch = event.target.value;
+      console.log("inside getComapnynames",batch);
+      getComapnyNamesForAddPlacedStudentsPage(batch).then((res)=>{
+         
+        if(res.data.Success){
+            setCompanyNames(res.data.Data);
+         }
+         else{
+          window.alert(res.data.Message);
+         }
+      }).catch((err)=>{
+         
+        console.log(err);
+      })
+  }
 
+
+  //for getting companydeatails
+
+  const getCompanydetails = (event)=>{
+      
+      const company = event.target.value;
+      const data = {
+        companyName:company,
+        batch:placedStudentDetails.batch
+      }
+      console.log("inside getCompanyDetails",company,placedStudentDetails.batch);
+      getCompanydetailsForAddplacedStudentspage(data).then((res)=>{
+         
+          if(res.data.Success){
+             setRoles(res.data.roles);
+             setPackages(res.data.packages);
+          }
+      })
+  }
+
+  const getStudentDetails = (event)=>{
+     const rollNo = event.target.value;
+     const data = {
+       rollNo:rollNo,
+       batch :placedStudentDetails.batch
+     }
+     console.log("inside getStudentDetails",rollNo);
+
+     getStudentDetailsForAddPlacedStudentPage(data).then((res)=>{
+
+              if(res.data.Success){
+                  setPlacedStudentsDetails({
+                    rollNo : res.data.Data.rollNo,
+                    regNo : res.data.Data.regNo,
+                    fullName : res.data.Data.fullName,
+                    department:res.data.Data.department
+                  })
+              }
+     })
+  }
+   
   //boolstate spinner
 
   const [spinner, setSpinner] = useState(false);
@@ -50,16 +115,10 @@ const AddPlacedStudents = () => {
         setSpinner(false);
     })
 
-    setPlacedStudentsDetails({
-      companyName: "",
-      fullName: "",
+    setPlacedStudentsDetails({...placedStudentDetails,fullName: "",
       regNo: "",
       rollNo: "",
-      Package: "",
-      department: "",
-      batch: "",
-      role:''
-    });
+      department: "",});
   };
   return (
     <>
@@ -69,18 +128,50 @@ const AddPlacedStudents = () => {
         <Card bg="light">
           <Form style={{ marginTop: "3%" }} onSubmit={onHandleSubmit}>
             <Form.Group as={Row} className="mb-3">
+            <Form.Label column sm={2} style={{ textAlign: "center" }}>
+                <strong>Batch</strong>
+              </Form.Label>
+              <Col sm={5}>
+              <Form.Control as='select' value={placedStudentDetails.batch}  aria-label="Default select example" name="batch" onChange={(e)=>{
+                 OnHandleChange(e);
+                 getComapanyNames(e);
+              }}>
+                <option>Batch of the student</option>
+                <option value="2020-2024">2020-2024</option>
+                <option value="2021-2025">2021-2025</option>
+                <option value="2022-2026">2022-2026</option>
+                <option value="2023-2027">2023-2027</option>
+                <option value="2024-2028">2024-2028</option>
+                <option value="2025-2029">2025-2029</option>
+                <option value="2026-2030">2026-2030</option>
+                <option value="2027-2031">2027-2031</option>
+                <option value="2028-2032">2028-2032</option>
+                <option value="2029-2033">2029-2033</option>
+                <option value="2030-2034">2030-2034</option>
+              </Form.Control>
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3">
               <Form.Label column sm={2} style={{ textAlign: "center" }}>
                 <strong>CompanyName</strong>
               </Form.Label>
               <Col sm={5}>
                 <Form.Control
-                  type="text"
+                  as='select'
                   value={placedStudentDetails.companyName}
                   name="companyName"
-                  onChange={OnHandleChange}
-                  placeholder="Enter The Company name-(eg : Google)"
+                  onChange={(e)=>{
+                    OnHandleChange(e);
+                    getCompanydetails(e);
+                  }}
+                  placeholder
                   required
-                />
+                >
+                  <option>Select Company Name</option>
+                  {companyNames.map((val)=>{
+                      return <option value={val}>{val}</option>
+                  })}
+                </Form.Control>
               </Col>
             </Form.Group>
             <Form.Group as={Row} className="mb-3">
@@ -88,14 +179,19 @@ const AddPlacedStudents = () => {
                 <strong>Role</strong>
               </Form.Label>
               <Col sm={5}>
-                <Form.Control
-                  type="text"
+              <Form.Control
+                  as='select'
                   value={placedStudentDetails.role}
                   name="role"
                   onChange={OnHandleChange}
-                  placeholder="Enter The Role -(eg: FullStack)"
+                  placeholder
                   required
-                />
+                >
+                  <option>Select a Role</option>
+                  {roles.map((val)=>{
+                      return <option value={val}>{val}</option>
+                  })}
+                </Form.Control>
               </Col>
             </Form.Group>
             <Form.Group as={Row} className="mb-3">
@@ -103,12 +199,38 @@ const AddPlacedStudents = () => {
                 <strong>Package</strong>
               </Form.Label>
               <Col sm={5}>
-                <Form.Control
-                  type="number"
+              <Form.Control
+                  as='select'
                   value={placedStudentDetails.Package}
                   name="Package"
                   onChange={OnHandleChange}
-                  placeholder="Enter The Package Of Company without LPA"
+                  placeholder
+                  required
+                >
+                  <option>Select a Package</option>
+                  {packages.map((val)=>{
+                      return <option value={val}>{val}</option>
+                  })}
+                </Form.Control>
+                </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm={2} style={{ textAlign: "center" }}>
+                <strong>Roll Number</strong>
+              </Form.Label>                                                                            
+              <Col sm={5}>
+                <Form.Control
+                  type="text"
+                  value={placedStudentDetails.rollNo}
+                  name="rollNo"
+                  onChange={(e)=>{
+                    OnHandleChange(e);
+                    if(e.target.value.length == 7){
+                      getStudentDetails(e);
+                    }
+                  }}
+                  pattern="[0-9]{2}[A-Z]{2}[0-9]{3}"
+                  placeholder="Enter The Roll No of Student"
                   required
                 />
               </Col>
@@ -141,42 +263,6 @@ const AddPlacedStudents = () => {
                   placeholder="Enter The Registration No of Student"
                   required
                 />
-              </Col>
-            </Form.Group>
-            <Form.Group as={Row} className="mb-3">
-              <Form.Label column sm={2} style={{ textAlign: "center" }}>
-                <strong>Roll Number</strong>
-              </Form.Label>
-              <Col sm={5}>
-                <Form.Control
-                  type="text"
-                  value={placedStudentDetails.rollNo}
-                  name="rollNo"
-                  onChange={OnHandleChange}
-                  placeholder="Enter The Registration No of Student"
-                  required
-                />
-              </Col>
-            </Form.Group>
-            <Form.Group as={Row} className="mb-3">
-            <Form.Label column sm={2} style={{ textAlign: "center" }}>
-                <strong>Batch</strong>
-              </Form.Label>
-              <Col sm={5}>
-              <Form.Control as='select' value={placedStudentDetails.batch} aria-label="Default select example" name="batch" onChange={OnHandleChange}>
-                <option>Batch of the student</option>
-                <option value="2024">2024</option>
-                <option value="2025">2025</option>
-                <option value="2026">2026</option>
-                <option value="2027">2027</option>
-                <option value="2028">2028</option>
-                <option value="2029">2029</option>
-                <option value="2030">2030</option>
-                <option value="2031">2031</option>
-                <option value="2032">2032</option>
-                <option value="2033">2033</option>
-                <option value="2034">2034</option>
-              </Form.Control>
               </Col>
             </Form.Group>
             <Form.Group as={Row} className="mb-3">

@@ -66,7 +66,7 @@ const MainNavbar = () => {
             </Nav.Link>
             {!isAuthenticated() && (
                 <Nav.Link as={Link} to="/login" className="navLink" active>
-                <strong>KEY IN</strong> 
+                <strong>LOG IN</strong> 
                </Nav.Link>
             )}
              

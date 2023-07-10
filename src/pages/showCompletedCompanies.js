@@ -153,17 +153,17 @@ const ShowCompletedCompanies = () => {
                       onChange={OnHandleChange}
                     >
                       <option>Batch of the students</option>
-                      <option value="2024">2024</option>
-                      <option value="2025">2025</option>
-                      <option value="2026">2026</option>
-                      <option value="2027">2027</option>
-                      <option value="2028">2028</option>
-                      <option value="2029">2029</option>
-                      <option value="2030">2030</option>
-                      <option value="2031">2031</option>
-                      <option value="2032">2032</option>
-                      <option value="2033">2033</option>
-                      <option value="2034">2034</option>
+                      <option value="2020-2024">2020-2024</option>
+                      <option value="2021-2025">2021-2025</option>
+                      <option value="2022-2026">2022-2026</option>
+                      <option value="2023-2027">2023-2027</option>
+                      <option value="2024-2028">2024-2028</option>
+                      <option value="2025-2029">2025-2029</option>
+                      <option value="2026-2030">2026-2030</option>
+                      <option value="2027-2031">2027-2031</option>
+                      <option value="2028-2032">2028-2032</option>
+                      <option value="2029-2033">2029-2033</option>
+                      <option value="2030-2034">2030-2034</option>
                     </Form.Control>
                   </Col>
                   <Col sm={5}>
@@ -182,7 +182,7 @@ const ShowCompletedCompanies = () => {
         </Row>
         <Row style={{ marginTop: "3%" }}>
           <Card>
-            <h5 style={{ marginLeft: "3%" }}>Companies</h5>
+            <h5 style={{ marginLeft: "3%" }}>Completed Companies</h5>
             <hr
               style={{ border: "3px solid #004E9B", borderRadius: "5px" }}
             ></hr>
