@@ -196,11 +196,11 @@ const AddCompanies = () => {
               </Form.Label>
               <Col sm={5}>
                 <Form.Control
-                  type="text"
+                  type="number"
                   value={companyDetails.Package}
                   name="Package"
                   onChange={OnHandleChange}
-                  placeholder="Enter The Package-(eg : 12LPA (or) 12L-CTC)"
+                  placeholder="Enter The Package-(eg : 1200000 (or) 700000)"
                   required
                 />
               </Col>
