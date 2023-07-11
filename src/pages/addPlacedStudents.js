@@ -20,17 +20,21 @@ const AddPlacedStudents = () => {
     role:''
   });
  
-  const[companyNames,setCompanyNames] = useState(['Google','Nbase2','kanini','DevRev']);
-  const[roles,setRoles] = useState(['Fullstack','FrontEnd','Backend']);
-  const[packages,setPackages] = useState([700000,6000000,900000]);
+  const[companyNames,setCompanyNames] = useState([]);
+  const[roles,setRoles] = useState([]);
+  const[packages,setPackages] = useState([]);
    
   //for getting companyName
   
   const getComapanyNames = (event)=>{
       
       const batch = event.target.value;
+      sessionStorage.setItem('batch',batch);
       console.log("inside getComapnynames",batch);
-      getComapnyNamesForAddPlacedStudentsPage(batch).then((res)=>{
+      const data = {
+        batch:batch
+      }
+      getComapnyNamesForAddPlacedStudentsPage(data).then((res)=>{
          
         if(res.data.Success){
             setCompanyNames(res.data.Data);
@@ -50,6 +54,7 @@ const AddPlacedStudents = () => {
   const getCompanydetails = (event)=>{
       
       const company = event.target.value;
+      sessionStorage.setItem('company',company);
       const data = {
         companyName:company,
         batch:placedStudentDetails.batch
@@ -76,13 +81,28 @@ const AddPlacedStudents = () => {
 
               if(res.data.Success){
                   setPlacedStudentsDetails({
-                    rollNo : res.data.Data.rollNo,
-                    regNo : res.data.Data.regNo,
-                    fullName : res.data.Data.fullName,
-                    department:res.data.Data.department
+                    rollNo : res.data.Data[0].rollNo,
+                    regNo : res.data.Data[0].regNo,
+                    fullName : res.data.Data[0].fullName,
+                    department:res.data.Data[0].department
                   })
               }
      })
+  }
+
+  //logic for clear session
+
+  const clearSession = ()=>{
+      sessionStorage.removeItem('batch');
+      sessionStorage.removeItem('role');
+      sessionStorage.removeItem('package');
+      sessionStorage.removeItem('company');
+      setPlacedStudentsDetails({
+        batch:'',
+        companyName:'',
+        role:'',
+        Package:''
+      })
   }
    
   //boolstate spinner
@@ -98,6 +118,12 @@ const AddPlacedStudents = () => {
     event.preventDefault();
 
     console.log(placedStudentDetails);
+    placedStudentDetails.companyName = sessionStorage.getItem('company');
+    placedStudentDetails.batch = sessionStorage.getItem('batch');
+    placedStudentDetails.Package = sessionStorage.getItem('package');
+    placedStudentDetails.role = sessionStorage.getItem('role');
+    setPlacedStudentsDetails(placedStudentDetails)
+    console.log(placedStudentDetails.Package,placedStudentDetails.companyName,placedStudentDetails.role);
     setSpinner(true);
     addPlacedDetails(placedStudentDetails).then((res)=>{
          
@@ -114,11 +140,14 @@ const AddPlacedStudents = () => {
     }).finally(()=>{
         setSpinner(false);
     })
-
-    setPlacedStudentsDetails({...placedStudentDetails,fullName: "",
+    setPlacedStudentsDetails(placedStudentDetails);
+    setPlacedStudentsDetails({...placedStudentDetails,
+      fullName: "",
       regNo: "",
       rollNo: "",
-      department: "",});
+      department: "",
+    });
+    console.log(placedStudentDetails);
   };
   return (
     <>
@@ -126,6 +155,13 @@ const AddPlacedStudents = () => {
       <Container>
         <h1 style={{ textAlign: "center" }}>Add Placed Students</h1>
         <Card bg="light">
+         <Row style={{marginTop:"2%",textAlign:"right"}}>
+          <Col style={{textAlign:"right",marginRight:"4%"}}>
+          <Button variant="success" onClick={clearSession}>
+                  Finish
+          </Button>
+          </Col>  
+         </Row>
           <Form style={{ marginTop: "3%" }} onSubmit={onHandleSubmit}>
             <Form.Group as={Row} className="mb-3">
             <Form.Label column sm={2} style={{ textAlign: "center" }}>
@@ -183,7 +219,10 @@ const AddPlacedStudents = () => {
                   as='select'
                   value={placedStudentDetails.role}
                   name="role"
-                  onChange={OnHandleChange}
+                  onChange={(e)=>{
+                    OnHandleChange(e);
+                    sessionStorage.setItem('role',e.target.value);
+                  }}
                   placeholder
                   required
                 >
@@ -203,7 +242,10 @@ const AddPlacedStudents = () => {
                   as='select'
                   value={placedStudentDetails.Package}
                   name="Package"
-                  onChange={OnHandleChange}
+                  onChange={(e)=>{
+                    OnHandleChange(e);
+                    sessionStorage.setItem('package',e.target.value);
+                  }}
                   placeholder
                   required
                 >

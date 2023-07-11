@@ -5,8 +5,8 @@ import { getUserTypeOnLogin } from "./getRequset";
 //checking for user authenticated or not
 export const isAuthenticated =()=>{
     
-    // return  sessionStorage.getItem("isAuth")!=null && sessionStorage.getItem("isAuth");
-    return true;
+    return  sessionStorage.getItem("isAuth")!=null && sessionStorage.getItem("isAuth");
+    // return true;
 }
 
 export async function getCookie(){
@@ -26,7 +26,7 @@ export async function getCookie(){
 export const isAdmin = ()=>{
     
     
-    // return sessionStorage.getItem('userType')=="Admin";
-    return true;
+    return sessionStorage.getItem('userType')=="Admin";
+    // return true;
 }
 
