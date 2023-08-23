@@ -19,6 +19,8 @@ const AddPlacedStudents = () => {
     batch: "",
     role:''
   });
+
+  
  
   const[companyNames,setCompanyNames] = useState([]);
   const[roles,setRoles] = useState([]);
