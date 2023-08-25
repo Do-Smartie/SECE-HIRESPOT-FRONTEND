@@ -42,7 +42,6 @@ function App() {
         <Route path="/" element={<MainHome />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/addReviews" element={<AddReviews />}></Route>
         {/* <Route path="/404pageNotFound" element={<PageNotFound404 />} /> */}
         {!isAuthenticated() && (<Route path="/forgotPassword" element={<FotgotPassword />}/>)}
         <Route element={<ProtectedUserRoutes />}>
@@ -55,6 +54,7 @@ function App() {
           <Route path="/companyRegister" element={<CompanyRegister />} exact />
           <Route path="/singleCompanyresult" element={<SingleCompanyResults />} />
           <Route path="/profile" element={<Profile />} exact />
+          <Route path="/addReviews" element={<AddReviews />}/>
         </Route>
         {/* <Route element={<ProtectedFacultyPCRoute />}>
           <Route path="/addPlacedStudents" element={<AddPlacedStudents />}/>
