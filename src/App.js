@@ -28,6 +28,7 @@ import AddPlacedStudents from "./pages/addPlacedStudents";
 import ShowPipelinedCompanies from "./pages/ShowPiplinedCompanies";
 import ShowCompletedCompanies from "./pages/showCompletedCompanies";
 import PlacedStudents from "./pages/PlacedStudents";
+import AddReviews from "./pages/AddReviews";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -41,6 +42,7 @@ function App() {
         <Route path="/" element={<MainHome />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/addReviews" element={<AddReviews />}></Route>
         {/* <Route path="/404pageNotFound" element={<PageNotFound404 />} /> */}
         {!isAuthenticated() && (<Route path="/forgotPassword" element={<FotgotPassword />}/>)}
         <Route element={<ProtectedUserRoutes />}>

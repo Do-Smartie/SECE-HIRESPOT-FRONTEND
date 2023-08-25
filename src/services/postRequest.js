@@ -168,6 +168,63 @@ export const getStudentDetailsForAddPlacedStudentPage = async(data)=>{
 
 export const addPlacedDetails = async(data)=>{
 
-    return await axios.post(process.env.REACT_APP_BACKEND_API+'/sece/pc/addplaceddetails',data);
+    return await axios.post(process.env.REACT_APP_BACKEND_API+'/sece/pc/addplaceddetails',data,{withCredentials:true});
 }
+
+// post request for adding apti round review of Students about the compnay
+
+export const addAptiReview = async(data)=>{
+
+    return await axios.post(process.env.REACT_APP_BACKEND_API+'/sece/students/addaptireview',data,{withCredentials:true});
+}
+
+// post request for adding coding round review of Students about the compnay
+
+export const addCodingReview = async(data)=>{
+
+    return await axios.post(process.env.REACT_APP_BACKEND_API+'/sece/students/addcodingroundreview',data,{withCredentials:true});
+}
+
+// post request for adding Tech Hr round review of Students about the compnay
+
+export const addTechHrReview = async(data)=>{
+
+    return await axios.post(process.env.REACT_APP_BACKEND_API+'/sece/students/addtechhrreview',data,{withCredentials:true});
+}
+
+// post request for adding GD round review of Students about the compnay
+
+export const addGDReview = async(data)=>{
+
+    return await axios.post(process.env.REACT_APP_BACKEND_API+'/sece/students/addgdreview',data,{withCredentials:true});
+}
+
+// post request for adding Hackathon round review of Students about the compnay
+
+export const addHackathonReview = async(data)=>{
+
+    return await axios.post(process.env.REACT_APP_BACKEND_API+'/sece/students/addhackathonreview',data,{withCredentials:true});
+}
+
+// post request for adding PersonalHR round review of Students about the compnay
+
+export const addPersonalReview = async(data)=>{
+
+    return await axios.post(process.env.REACT_APP_BACKEND_API+'/sece/students/addpersonalhrreview',data,{withCredentials:true});
+}
+
+// post Route for getting comapny names for Students Feedback
+export const getComapnyNamesFeedBack = async(data)=>{
+
+    return await axios.post(process.env.REACT_APP_BACKEND_API+'/sece/students/getcompanynamesforfeedback',data,{withCredentials:true});
+}
+
+// post Route for getting comapny roles and Packages for Students Feedback
+export const getCompanyDetailsFeedBack = async(data)=>{
+
+    return await axios.post(process.env.REACT_APP_BACKEND_API+'/sece/students/getcompanydetailsforfeedback',data,{withCredentials:true});
+}
+
+
+
 
