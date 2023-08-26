@@ -10,30 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 const HackathonReview = (props) => {
   const [spinner, setSpinner] = useState(false);
-  const [checks, setChecks] = useState([
-    {
-      name: "Oops",
-      value: "Oops",
-      display: false,
-    },
-    {
-      name: "Data Structures",
-      value: "Data Structures",
-      display: false,
-    },
-    {
-      name: "Logical Thinking",
-      value: "Logical Thinking",
-      display: false,
-    },
-    {
-      name: "Resume Based",
-      value: "Resume Based",
-      display: false,
-    },
-  ]);
-
-  const [checkBoxValues, setCheckBoxValues] = useState([]);
+  
   const navigate = useNavigate();
 
   const { previewData, setAllInitialState } = props;
@@ -70,7 +47,7 @@ const HackathonReview = (props) => {
             return;
           }
           setSpinner(false);
-          setAllInitialState();
+          
         } else {
           window.alert(res.data.Message);
           setSpinner(false);
@@ -82,13 +59,9 @@ const HackathonReview = (props) => {
       })
       .finally(() => {
         setSpinner(false);
+        setAllInitialState();
       });
-    setCheckBoxValues([]);
-    checks.map((val) => {
-      val.display = false;
-    });
-
-    setChecks([...checks]);
+      
     setHackathonReviewDetail({
       roundNo: "",
       batch: "",

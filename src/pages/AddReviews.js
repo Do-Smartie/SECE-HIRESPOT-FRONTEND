@@ -91,7 +91,6 @@ const getCompanydetails = (event)=>{
 }
 
 const setAllInitialState = ()=>{
-     
      setPreviewData({
         roundNo:'',
         batch:'',

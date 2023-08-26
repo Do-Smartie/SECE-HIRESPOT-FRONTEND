@@ -129,9 +129,9 @@ const AptitudeReviewForm = (props) => {
     }).catch((err)=>{
         window.alert(err.response.data.Message);
         setSpinner(false);
-        setAllInitialState();
     }).finally(()=>{
         setSpinner(false);
+        setAllInitialState();
     })
 
     setCheckBoxValues([]);

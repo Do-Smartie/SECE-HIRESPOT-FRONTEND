@@ -18,6 +18,7 @@ const MainNavbar = () => {
   //var for bool isFacultyPC
 
   var isFacultyPC = sessionStorage.getItem('userType')==='FacultyPC';
+  var isStudent = sessionStorage.getItem('userType')==='Student';
   // var isFacultyPC = true;
 
   //logic for logout
@@ -75,6 +76,11 @@ const MainNavbar = () => {
               <strong>COMPANIES</strong>
             </Nav.Link> 
             )}
+            {isAuthenticated() && isStudent && (
+               <Nav.Link as={Link} to="/addReviews" className="navLink" active>
+               <strong>ADD REVIEWS</strong> 
+               </Nav.Link>
+            ) }
             {isAuthenticated() && isAdmin() && (
               <Nav.Link as={Link} to="/dashboard" className="navLink" active>
               <strong>DASHBOARD</strong> 

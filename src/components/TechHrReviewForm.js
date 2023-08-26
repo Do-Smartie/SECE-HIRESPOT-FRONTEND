@@ -115,7 +115,6 @@ const TechHrReviewForm = (props) => {
                return;
            }
            setSpinner(false);
-           setAllInitialState();
         }else{
 
            window.alert(res.data.Message);
@@ -126,6 +125,7 @@ const TechHrReviewForm = (props) => {
        setSpinner(false);
    }).finally(()=>{
        setSpinner(false);
+       setAllInitialState();
    })
     setCheckBoxValues([]);
     checks.map((val)=>{
